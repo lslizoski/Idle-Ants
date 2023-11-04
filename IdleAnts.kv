@@ -7,6 +7,10 @@ FloatLayouts:
     FloatLayout:
         orientation: "vertical"
 
+        Button:
+            text: "You should not see this"
+            size_hint: .45, 0.30
+            pos_hint: {'center_x': 0.5, 'y': 0.15}
 
         Image:
             source: "images/anthill_surface.png"
@@ -17,17 +21,17 @@ FloatLayouts:
         Label:
             text: "1"
             size_hint: .34, 1
-            pos_hint: {'x':0, 'top': 1}
+            pos_hint: {'x':0, 'top': 1.45}
 
         Label:
             text: "2"
             size_hint: .34, 1
-            pos_hint: {'x':.33, 'top': 1}
+            pos_hint: {'x':.33, 'top': 1.45}
 
         Label:
             text: "3"
             size_hint: .33, 1
-            pos_hint: {'right':1, 'top': 1}
+            pos_hint: {'right':1, 'top': 1.45}
 
         Button:
             text: "v\nv"
