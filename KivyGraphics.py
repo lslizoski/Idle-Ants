@@ -6,6 +6,10 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.widget import Widget
 
 
+class BoxLayouts(BoxLayout):
+    pass
+
+
 class MainWidget(Widget):
     pass
 
