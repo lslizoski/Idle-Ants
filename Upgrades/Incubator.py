@@ -1,12 +1,13 @@
 from kivy.storage.jsonstore import JsonStore
-from Upgrades.Promotions import Promotions
+from kivy.clock import Clock
+from Promotions import Promotions
 import os
 
 
 class Incubator:
 
     # Open json file for incubator room
-    incubatorUpgradesFile = JsonStore('C:/Users/pagel/OneDrive/Documents/GitHub/Idle-Ants/SavedData/Incubator.json')
+    incubatorUpgradesFile = JsonStore('Incubator.json')
 
     # Hatch multiplier
     hatchMultiplierTier = 1
@@ -24,19 +25,22 @@ class Incubator:
     def __init__(self):
         self.createFile()
 
+    def getSpeed(self):
+        return str(self.hatchSpeed)
+
     def setInitialVariables(self):
         # Hatch multiplier variables
-        self.hatchMultiplierTier = self.incubatorUpgradesFile.get('hatchMultiplier')['carryMultiplierTier']
-        self.hatchMultiplierTierStage = self.incubatorUpgradesFile.get('hatchMultiplier')['carryMultiplierTierStage']
+        self.hatchMultiplierTier = self.incubatorUpgradesFile.get('hatchMultiplier')['hatchMultiplierTier']
+        self.hatchMultiplierTierStage = self.incubatorUpgradesFile.get('hatchMultiplier')['hatchMultiplierTierStage']
         self.hatchMultiplier = self.incubatorUpgradesFile.get('hatchMultiplier')['value']
 
         # Hatch Speed Variables
-        self.hatchSpeedTier = self.incubatorUpgradesFile.get('hatchSpeed')['antSpeedTier']
-        self.hatchSpeedTierStage = self.incubatorUpgradesFile.get('hatchSpeed')['antSpeedTierStage']
+        self.hatchSpeedTier = self.incubatorUpgradesFile.get('hatchSpeed')['hatchSpeedTier']
+        self.hatchSpeedTierStage = self.incubatorUpgradesFile.get('hatchSpeed')['hatchSpeedTierStage']
         self.hatchSpeed = self.incubatorUpgradesFile.get('hatchSpeed')['value']
 
     def createFile(self):
-        path = 'C:/Users/pagel/OneDrive/Documents/GitHub/Idle-Ants/SavedData/Incubator.json'
+        path = 'Incubator.json'
         if not os.path.isfile(path):
             self.incubatorUpgradesFile.put('hatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
             self.incubatorUpgradesFile.put('hatchSpeed', value=self.hatchSpeed, hatchSpeedTier=self.hatchSpeedTier, hatchSpeedTierStage=self.hatchSpeedTierStage)

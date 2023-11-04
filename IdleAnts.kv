@@ -2,14 +2,33 @@ BoxLayouts:
 
 <BoxLayouts>:
     orientation: "vertical"
+
+    BoxLayout:
+        size_hint: 1, .25
+        orientation: "horizontal"
+
+        Label:
+            text: '1'
+            size_hint: .33, 1
+            pos_hint: {'x':0, 'top': 1}
+
+        Label:
+            text: "2"
+            size_hint: .34, 1
+            pos_hint: {'x':.33, 'top': 1}
+
+        Label:
+            text: "3"
+            size_hint: .33, 1
+            pos_hint: {'right':1, 'top': 1}
+
     Image:
         source: "images/anthill_surface.png"
         allow_stretch: True
         keep_ratio: False
+        size_hint: 1, 3
 
     Button:
-        text: "+"
-        size: "100dp", "40dp"
-        pos: "350dp", "550dp"
-        # call function from main file with button press
-        on_press: root.addInt()
+        text: "v\nv"
+        size_hint: 1, .25
+        pos_hint: {'right':1, 'bottom': 0}

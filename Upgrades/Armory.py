@@ -1,12 +1,12 @@
 from kivy.storage.jsonstore import JsonStore
-from Upgrades.Promotions import Promotions
+from Promotions import Promotions
 import os
 
 
 class Armory:
 
     # Open json file for incubator room
-    incubatorUpgradesFile = JsonStore('C:/Users/pagel/OneDrive/Documents/GitHub/Idle-Ants/SavedData/Armory.json')
+    armoryUpgradesFile = JsonStore('Armory.json')
 
     # Ant Carry Weight multiplier
     carryMultiplierTier = 1
@@ -26,20 +26,20 @@ class Armory:
 
     def setInitialVariables(self):
         # Hatch multiplier variables
-        self.carryMultiplierTier = self.incubatorUpgradesFile.get('carryMultiplier')['carryMultiplierTier']
-        self.carryMultiplierTierStage = self.incubatorUpgradesFile.get('carryMultiplier')['carryMultiplierTierStage']
-        self.carryMultiplier = self.incubatorUpgradesFile.get('carryMultiplier')['value']
+        self.carryMultiplierTier = self.armoryUpgradesFile.get('carryMultiplier')['carryMultiplierTier']
+        self.carryMultiplierTierStage = self.armoryUpgradesFile.get('carryMultiplier')['carryMultiplierTierStage']
+        self.carryMultiplier = self.armoryUpgradesFile.get('carryMultiplier')['value']
 
         # Hatch Speed Variables
-        self.antSpeedTier = self.incubatorUpgradesFile.get('antSpeed')['antSpeedTier']
-        self.antSpeedTierStage = self.incubatorUpgradesFile.get('antSpeed')['antSpeedTierStage']
-        self.antSpeed = self.incubatorUpgradesFile.get('antSpeed')['value']
+        self.antSpeedTier = self.armoryUpgradesFile.get('antSpeed')['antSpeedTier']
+        self.antSpeedTierStage = self.armoryUpgradesFile.get('antSpeed')['antSpeedTierStage']
+        self.antSpeed = self.armoryUpgradesFile.get('antSpeed')['value']
 
     def createFile(self):
-        path = 'C:/Users/pagel/OneDrive/Documents/GitHub/Idle-Ants/SavedData/Armory.json'
+        path = 'Armory.json'
         if not os.path.isfile(path):
-            self.incubatorUpgradesFile.put('carryMultiplier', value=self.carryMultiplier, hatchMultiplierTier=self.carryMultiplierTier, hatchMultiplierTierStage=self.carryMultiplierTierStage)
-            self.incubatorUpgradesFile.put('antSpeed', value=self.antSpeed, hatchSpeedTier=self.antSpeedTier, hatchSpeedTierStage=self.antSpeedTierStage)
+            self.armoryUpgradesFile.put('carryMultiplier', value=self.carryMultiplier, carryMultiplierTier=self.carryMultiplierTier, carryMultiplierTierStage=self.carryMultiplierTierStage)
+            self.armoryUpgradesFile.put('antSpeed', value=self.antSpeed, antSpeedTier=self.antSpeedTier, antSpeedTierStage=self.antSpeedTierStage)
 
         else:
             self.setInitialVariables()
@@ -47,12 +47,12 @@ class Armory:
     def upgradeAntSpeed(self):
         self.antSpeed -= self.antSpeed * self.increasePercent
         self.antSpeedTier, self.antSpeedTierStage, self.increasePercent = Promotions().percentage(self.antSpeedTier, self.antSpeedTierStage, self.increasePercent)
-        self.incubatorUpgradesFile.put('HatchSpeed', value=self.antSpeed, hatchSpeedTier=self.antSpeedTier, hatchSpeedTierStage=self.antSpeedTierStage)
+        self.armoryUpgradesFile.put('HatchSpeed', value=self.antSpeed, hatchSpeedTier=self.antSpeedTier, hatchSpeedTierStage=self.antSpeedTierStage)
 
     def upgradeCarryMultiplier(self):
         self.carryMultiplier = self.carryMultiplierTier
         self.carryMultiplierTier, self.carryMultiplierTierStage, self.carryMultiplier = Promotions().multiplier(self.carryMultiplierTier, self.carryMultiplierTierStage, self.carryMultiplier)
-        self.incubatorUpgradesFile.put('HatchMultiplier', value=self.carryMultiplier, hatchMultiplierTier=self.carryMultiplierTier, hatchMultiplierTierStage=self.carryMultiplierTierStage)
+        self.armoryUpgradesFile.put('HatchMultiplier', value=self.carryMultiplier, hatchMultiplierTier=self.carryMultiplierTier, hatchMultiplierTierStage=self.carryMultiplierTierStage)
 
 
 armory = Armory()
