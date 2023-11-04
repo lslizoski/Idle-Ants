@@ -5,12 +5,12 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.widget import Widget
 from kivy.uix.image import Image
 
-# from Upgrades.Incubator import Incubator
+from Upgrades.Incubator import Incubator
 class BoxLayouts(BoxLayout):
     # Method to be called when a button is pressed
-    # def showSpeed(self):
-    #     self.incubator = Incubator()
-    #     self.incubator.getSpeed()
+    def showSpeed(self):
+        self.incubator = Incubator()
+        self.incubator.getSpeed()
     pass
 
 class MainWidget(Widget):
