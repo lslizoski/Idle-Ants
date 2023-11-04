@@ -1,5 +1,6 @@
 from kivy.storage.jsonstore import JsonStore
 import os.path
+from Upgrades.Incubator import Incubator
 
 class FoodStorage:
     
@@ -7,6 +8,7 @@ class FoodStorage:
     currentFoodUnits = 0
     maxFoodCapacity  = 50
     previousMaxCapacity = 50
+    incubator = Incubator()
     
     def __init__(self):
         self.createFile()
@@ -37,7 +39,11 @@ class FoodStorage:
         self.foodStorageFile.put('currentFoodUnits', value=self.currentFoodUnits)
 
     def upgradeStorage(self):
-        self.maxFoodCapacity += self.previousMaxCapacity
-        self.previousMaxCapacity = self.maxFoodCapacity
-        self.foodStorageFile.put('maxFoodCapacity', value=self.maxFoodCapacity)
-        self.foodStorageFile.put('previousMaxCapacity', value=self.previousMaxCapacity)
+        if (self.incubator.getAnts() >= 50):
+            self.maxFoodCapacity += 50
+            self.incubator.setAnts(self.incubator.getAnts() - 50)
+            self.foodStorageFile.put('maxFoodCapacity', value=self.maxFoodCapacity)
+            self.foodStorageFile.put('previousMaxCapacity', value=self.previousMaxCapacity)
+            print(self.incubator.getAnts())
+        else:
+            print("Not enough food resources")

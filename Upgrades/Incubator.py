@@ -2,7 +2,6 @@ from kivy.storage.jsonstore import JsonStore
 from Promotions import Promotions
 import os
 
-
 class Incubator:
 
     # Open json file for incubator room
@@ -65,4 +64,9 @@ class Incubator:
     def addAnt(self, amount):
         self.antCounter += amount
         self.incubatorUpgradesFile.put('antCounter', value=self.antCounter)
-        print(self.incubatorUpgradesFile.get('antCounter')['value'])
+
+    def getAnts(self):
+        return self.incubatorUpgradesFile.get('antCounter')['value']
+
+    def setAnts(self, totalAmount):
+        self.incubatorUpgradesFile.put('antCounter', value=totalAmount)
