@@ -16,3 +16,6 @@ class MainWidget(Widget):
 
 class IdleAntsApp(App):
     pass
+
+
+IdleAntsApp().run()
