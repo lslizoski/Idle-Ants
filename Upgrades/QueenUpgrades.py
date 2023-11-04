@@ -1,6 +1,7 @@
 from kivy.storage.jsonstore import JsonStore
 import os.path
 from Promotions import Promotions
+from Upgrades.FoodStorage import FoodStorage
 
 class QueenUpgrades:
 
@@ -14,11 +15,13 @@ class QueenUpgrades:
     eggMultiplierTier = 1
     eggMultiplierTierStage = 0
 
+    eggCounter = 0
+
+    foodStorage = FoodStorage()
+
     def __init__(self):
         self.createFile()
         self.loadSavedData()
-        self.upgradeEggMultiplier()
-        self.upgradeEggLaySpeed()
 
     def createFile(self):
         path = 'QueenUpgrades.json'
@@ -40,11 +43,19 @@ class QueenUpgrades:
         self.queenUpgradesFile.put('eggMultiplier', value=self.eggMultiplier, eggMultiplierTier=self.eggMultiplierTier, eggMultiplierTierStage=self.eggMultiplierTierStage)
 
     def upgradeEggLaySpeed(self):
-        self.eggLaySpeed -= self.eggLaySpeed * self.upgradePercentage
-        self.eggLaySpeedTier, self.eggLaySpeedTierStage, self.upgradePercentage = Promotions().percentage(self.eggLaySpeedTier, self.eggLaySpeedTierStage, self.upgradePercentage)
-        self.queenUpgradesFile.put('eggLaySpeed', value=self.eggLaySpeed, eggLaySpeedTier=self.eggLaySpeedTier, eggLaySpeedTierStage=self.eggLaySpeedTierStage)
+        if (self.foodStorage.getFood() >= 50):
+            self.foodStorage.setFood(self.foodStorage.getFood() - 50)
+            self.eggLaySpeed -= self.eggLaySpeed * self.upgradePercentage
+            self.eggLaySpeedTier, self.eggLaySpeedTierStage, self.upgradePercentage = Promotions().percentage(self.eggLaySpeedTier, self.eggLaySpeedTierStage, self.upgradePercentage)
+            self.queenUpgradesFile.put('eggLaySpeed', value=self.eggLaySpeed, eggLaySpeedTier=self.eggLaySpeedTier, eggLaySpeedTierStage=self.eggLaySpeedTierStage)
+        else:
+            print("Not enough food resources.")
 
     def upgradeEggMultiplier(self):
-        self.eggMultiplier =  self.eggMultiplierTier
-        self.eggMultiplierTier, self.eggMultiplierTierStage, self.eggMultiplier = Promotions().multiplier(self.eggMultiplierTier, self.eggMultiplierTierStage, self.eggMultiplier)
-        self.queenUpgradesFile.put('eggMultiplier', value=self.eggMultiplier, eggMultiplierTier=self.eggMultiplierTier, eggMultiplierTierStage=self.eggMultiplierTierStage)
+        if (self.foodStorage.getFood() >= 100):
+            self.foodStorage.setFood(self.foodStorage.getFood() - 100)
+            self.eggMultiplier =  self.eggMultiplierTier
+            self.eggMultiplierTier, self.eggMultiplierTierStage, self.eggMultiplier = Promotions().multiplier(self.eggMultiplierTier, self.eggMultiplierTierStage, self.eggMultiplier)
+            self.queenUpgradesFile.put('eggMultiplier', value=self.eggMultiplier, eggMultiplierTier=self.eggMultiplierTier, eggMultiplierTierStage=self.eggMultiplierTierStage)
+        else:
+            print("Not enough food resources.")

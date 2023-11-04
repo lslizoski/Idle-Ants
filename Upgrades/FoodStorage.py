@@ -44,6 +44,11 @@ class FoodStorage:
             self.incubator.setAnts(self.incubator.getAnts() - 50)
             self.foodStorageFile.put('maxFoodCapacity', value=self.maxFoodCapacity)
             self.foodStorageFile.put('previousMaxCapacity', value=self.previousMaxCapacity)
-            print(self.incubator.getAnts())
         else:
-            print("Not enough food resources")
+            print("Not enough ant resources.")
+
+    def getFood(self):
+        return self.foodStorageFile.get('currentFoodUnits')['value']
+
+    def setFood(self, totalAmount):
+        self.foodStorageFile.put('currentFoodUnits', value=totalAmount)
