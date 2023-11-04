@@ -41,5 +41,3 @@ class FoodStorage:
         self.previousMaxCapacity = self.maxFoodCapacity
         self.foodStorageFile.put('maxFoodCapacity', value=self.maxFoodCapacity)
         self.foodStorageFile.put('previousMaxCapacity', value=self.previousMaxCapacity)
-
-
