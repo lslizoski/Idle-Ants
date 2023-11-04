@@ -1,31 +1,7 @@
-BoxLayouts:
+FloatLayouts:
 
-<BoxLayouts>:
+<FloatLayouts>:
     orientation: "vertical"
-
-    Button:
-        text: "^\n^"
-        size_hint: 1, .25
-        pos_hint: {'right':1, 'top': 1}
-
-    BoxLayout:
-        size_hint: 1, .25
-        orientation: "horizontal"
-
-        Label:
-            text: '1'
-            size_hint: .33, 1
-            pos_hint: {'x':0, 'top': 1}
-
-        Label:
-            text: "2"
-            size_hint: .34, 1
-            pos_hint: {'x':.33, 'top': 1}
-
-        Label:
-            text: "3"
-            size_hint: .33, 1
-            pos_hint: {'right':1, 'top': 1}
 
     Image:
         source: "images/anthill_tunnels.png"
@@ -33,3 +9,11 @@ BoxLayouts:
         keep_ratio: False
         fit_mode: "contain"
 
+    Button:
+        text: "^\n^"
+        size_hint: .25, .05
+        pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+
+    BoxLayout:
+        size_hint: 1, .25
+        orientation: "horizontal"
