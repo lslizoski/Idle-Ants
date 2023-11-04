@@ -56,4 +56,3 @@ class Incubator:
 
 
 incubator = Incubator()
-incubator.upgradeHatchMultiplier()

@@ -1,10 +1,15 @@
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.widget import Widget
+from Incubator import Incubator
 
 from kivy.graphics import Line
 class MainWidget(Widget):
-    pass
+
+    # Create Method that can be called by with the buttons
+    def addInt(self):
+        self.incubator = Incubator()
+        self.incubator.upgradeHatchSpeed()
 class Line1(Widget):
     pass
 class Line2(Widget):
