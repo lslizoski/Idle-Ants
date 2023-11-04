@@ -2,6 +2,9 @@ from kivy.storage.jsonstore import JsonStore
 from Promotions import Promotions
 import os
 
+from QueenUpgrades import QueenUpgrades
+
+
 class Incubator:
 
     # Open json file for incubator room
@@ -20,7 +23,7 @@ class Incubator:
     increasePercent = 0.025
 
     antCounter = 0
-
+    queenUpgrades = QueenUpgrades()
 
     def __init__(self):
         self.createFile()
@@ -61,12 +64,13 @@ class Incubator:
         self.hatchMultiplierTier, self.hatchMultiplierTierStage, self.hatchMultiplier = Promotions().multiplier(self.hatchMultiplierTier, self.hatchMultiplierTierStage, self.hatchMultiplier)
         self.incubatorUpgradesFile.put('HatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
 
-    def addAnt(self, amount):
+    def hatchEgg(self):
+        self.queenUpgrades.setEggs(self.queenUpgrades.getEggs() - 1)
+        self.setAnts(self.getAnts() + self.hatchMultiplier)
+
+    def setAnts(self, amount):
         self.antCounter += amount
         self.incubatorUpgradesFile.put('antCounter', value=self.antCounter)
 
     def getAnts(self):
         return self.incubatorUpgradesFile.get('antCounter')['value']
-
-    def setAnts(self, totalAmount):
-        self.incubatorUpgradesFile.put('antCounter', value=totalAmount)

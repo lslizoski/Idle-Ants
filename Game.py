@@ -17,8 +17,9 @@ class Game:
 
     def update(self):
         pass
+
     def layEgg(self):
-        self.queenUpgrades.addEggs(self.queenUpgrades.eggMultiplier)
+        self.queenUpgrades.setEggs(self.queenUpgrades.getEggs() + self.queenUpgrades.eggMultiplier)
 
     def foodUpgradeButton(self):
         self.foodStorage.upgradeStorage()
