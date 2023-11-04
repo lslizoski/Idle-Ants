@@ -1,15 +1,22 @@
-BoxLayouts:
+FloatLayouts:
 
-<BoxLayouts>:
-    orientation: "vertical"
 
-    BoxLayout:
-        size_hint: 1, .25
-        orientation: "horizontal"
+<FloatLayouts>:
+
+
+    FloatLayout:
+        orientation: "vertical"
+
+
+        Image:
+            source: "images/anthill_surface.png"
+            allow_stretch: True
+            keep_ratio: False
+            fit_mode: "contain"
 
         Label:
-            text: '1'
-            size_hint: .33, 1
+            text: "1"
+            size_hint: .34, 1
             pos_hint: {'x':0, 'top': 1}
 
         Label:
@@ -22,13 +29,7 @@ BoxLayouts:
             size_hint: .33, 1
             pos_hint: {'right':1, 'top': 1}
 
-    Image:
-        source: "images/anthill_surface.png"
-        allow_stretch: True
-        keep_ratio: False
-        fit_mode: "contain"
-
-    Button:
-        text: "v\nv"
-        size_hint: 1, .25
-        pos_hint: {'right':1, 'bottom': 0}
+        Button:
+            text: "v\nv"
+            size_hint: .25, .05
+            pos_hint: {'center_x': 0.5}
