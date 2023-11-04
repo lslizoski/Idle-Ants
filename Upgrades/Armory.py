@@ -1,7 +1,6 @@
 from kivy.storage.jsonstore import JsonStore
-from Promotions import Promotions
+from Upgrades.Promotions import Promotions
 import os
-
 
 class Armory:
 
@@ -53,8 +52,3 @@ class Armory:
         self.carryMultiplier = self.carryMultiplierTier
         self.carryMultiplierTier, self.carryMultiplierTierStage, self.carryMultiplier = Promotions().multiplier(self.carryMultiplierTier, self.carryMultiplierTierStage, self.carryMultiplier)
         self.armoryUpgradesFile.put('HatchMultiplier', value=self.carryMultiplier, hatchMultiplierTier=self.carryMultiplierTier, hatchMultiplierTierStage=self.carryMultiplierTierStage)
-
-
-armory = Armory()
-armory.upgradeCarryMultiplier()
-armory.upgradeAntSpeed()

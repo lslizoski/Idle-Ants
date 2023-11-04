@@ -16,7 +16,7 @@ class FoodStorage:
         path = 'FoodStorage.json'
         fileExists = os.path.isfile(path)
         if not fileExists:
-            self.foodStorageFile = JsonStore('C:/Users/pagel/OneDrive/Documents/GitHub/Idle-Ants/SavedData/FoodStorage.json')
+            self.foodStorageFile = JsonStore('FoodStorage.json')
             self.setDefaultVariables()
 
     def loadSavedData(self):

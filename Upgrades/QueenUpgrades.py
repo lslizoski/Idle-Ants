@@ -48,5 +48,3 @@ class QueenUpgrades:
         self.eggMultiplier =  self.eggMultiplierTier
         self.eggMultiplierTier, self.eggMultiplierTierStage, self.eggMultiplier = Promotions().multiplier(self.eggMultiplierTier, self.eggMultiplierTierStage, self.eggMultiplier)
         self.queenUpgradesFile.put('eggMultiplier', value=self.eggMultiplier, eggMultiplierTier=self.eggMultiplierTier, eggMultiplierTierStage=self.eggMultiplierTierStage)
-
-queenUpgrades = QueenUpgrades()

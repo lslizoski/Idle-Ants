@@ -21,8 +21,7 @@ class Game:
     def queenMultiplierUpgradeButton(self):
         self.queenUpgrades.upgradeEggMultiplier()
         if self.sound:
-            print("Sound found at %s" % self.sound.source)
-            print("Sound is %.3f seconds" % self.sound.length)
+            self.sound.volume = 1
             self.sound.play()
 
     def queenEggSpeedUpgradeButton(self):

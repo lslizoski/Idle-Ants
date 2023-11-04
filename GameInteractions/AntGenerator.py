@@ -13,5 +13,3 @@ class AntGenerator:
 
     def hasFood(self):
         pass
-
-antGenerator = AntGenerator()
