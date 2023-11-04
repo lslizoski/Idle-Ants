@@ -1,4 +1,5 @@
 from kivy.storage.jsonstore import JsonStore
+from Promotions import Promotions
 import os
 
 
@@ -44,30 +45,15 @@ class Incubator:
             self.setInitialVariables()
 
     def upgradeHatchSpeed(self):
-        if self.hatchSpeedTier == 2:
-            self.increasePercent = 0.05
-        if self.hatchSpeedTier == 3:
-            self.increasePercent = 0.075
-        if self.hatchSpeedTier == 4:
-            self.increasePercent = 0.1
-        if self.hatchSpeedTier == 5:
-            self.increasePercent = 0.15
         self.hatchSpeed -= self.hatchSpeed * self.increasePercent
+        self.hatchSpeedTier, self.hatchSpeedTierStage, self.increasePercent = Promotions().percentage(self.hatchSpeedTier, self.hatchSpeedTierStage, self.increasePercent)
         self.incubatorUpgradesFile.put('HatchSpeed', value=self.hatchSpeed, hatchSpeedTier=self.hatchSpeedTier, hatchSpeedTierStage=self.hatchSpeedTierStage)
 
     def upgradeHatchMultiplier(self):
-        if self.hatchMultiplierTier == 2:
-            self.hatchMultiplierIncrease = 2
-        if self.hatchMultiplierTier == 3:
-            self.hatchMultiplierIncrease = 3
-        if self.hatchMultiplierTier == 4:
-            self.hatchMultiplierIncrease = 4
-        if self.hatchMultiplierTier == 5:
-            self.hatchMultiplierIncrease = 5
-        self.hatchMultiplier += self.hatchMultiplierIncrease
+        self.hatchMultiplier = self.hatchMultiplierTier
+        self.hatchMultiplierTier, self.hatchMultiplierTierStage, self.hatchMultiplier = Promotions().multiplier(self.hatchMultiplierTier, self.hatchMultiplierTierStage, self.hatchMultiplier)
         self.incubatorUpgradesFile.put('HatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
 
 
 incubator = Incubator()
-incubator.upgradeHatchSpeed()
 incubator.upgradeHatchMultiplier()
