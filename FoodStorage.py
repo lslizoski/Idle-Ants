@@ -8,8 +8,9 @@ class FoodStorage:
     currentFoodUnits = 0
     maxFoodCapacity  = 50
     previousMaxCapacity = 50
-    incubator = Incubator()
-    
+
+    incubatorUpgradesFile = JsonStore('Incubator.json')
+
     def __init__(self):
         self.createFile()
         self.loadSavedData()
@@ -39,13 +40,19 @@ class FoodStorage:
         self.foodStorageFile.put('currentFoodUnits', value=self.currentFoodUnits)
 
     def upgradeStorage(self):
-        if (self.incubator.getAnts() >= 50):
+        if (self.getAnts() >= 50):
             self.maxFoodCapacity += 50
-            self.incubator.setAnts(self.incubator.getAnts() - 50)
+            self.setAnts(self.getAnts() - 50)
             self.foodStorageFile.put('maxFoodCapacity', value=self.maxFoodCapacity)
             self.foodStorageFile.put('previousMaxCapacity', value=self.previousMaxCapacity)
         else:
             print("Not enough ant resources.")
+
+    def getAnts(self):
+        return self.incubatorUpgradesFile.get('antCounter')['value']
+
+    def setAnts(self, totalAmount):
+        self.incubatorUpgradesFile.put('antCounter', value=totalAmount)
 
     def getFood(self):
         return self.foodStorageFile.get('currentFoodUnits')['value']
