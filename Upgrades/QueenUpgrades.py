@@ -4,7 +4,7 @@ from Upgrades.Promotions import Promotions
 
 class QueenUpgrades:
 
-    queenUpgradesFile = JsonStore('../Idle-Ants/SavedData/QueenUpgrades.json')
+    queenUpgradesFile = JsonStore('C:/Users/pagel/OneDrive/Documents/GitHub/Idle-Ants/SavedData/QueenUpgrades.json')
     eggLaySpeed = 60
     eggMultiplier = 1
     upgradePercentage = 0.025
@@ -21,10 +21,9 @@ class QueenUpgrades:
         self.upgradeEggLaySpeed()
 
     def createFile(self):
-        path = '../Idle-Ants/SavedData/QueenUpgrades.json'
+        path = 'C:/Users/pagel/OneDrive/Documents/GitHub/Idle-Ants/SavedData/QueenUpgrades.json'
         fileExists = os.path.isfile(path)
         if not fileExists:
-            self.queenUpgradesFile = JsonStore('../Idle-Ants/SavedData/QueenUpgrades.json')
             self.setDefaultVariables()
 
     def loadSavedData(self):

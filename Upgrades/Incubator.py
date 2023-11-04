@@ -1,11 +1,12 @@
 from kivy.storage.jsonstore import JsonStore
-from Promotions import Promotions
+from Upgrades.Promotions import Promotions
 import os
+
 
 class Incubator:
 
     # Open json file for incubator room
-    incubatorUpgradesFile = JsonStore('../SavedData/Incubator.json')
+    incubatorUpgradesFile = JsonStore('C:/Users/pagel/OneDrive/Documents/GitHub/Idle-Ants/SavedData/Incubator.json')
 
     # Hatch multiplier
     hatchMultiplierTier = 1
@@ -35,7 +36,7 @@ class Incubator:
         self.hatchSpeed = self.incubatorUpgradesFile.get('HatchSpeed')['value']
 
     def createFile(self):
-        path = '../SavedData/Incubator.json'
+        path = 'C:/Users/pagel/OneDrive/Documents/GitHub/Idle-Ants/SavedData/Incubator.json'
         if not os.path.isfile(path):
             self.incubatorUpgradesFile.put('HatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
             self.incubatorUpgradesFile.put('HatchSpeed', value=self.hatchSpeed, hatchSpeedTier=self.hatchSpeedTier, hatchSpeedTierStage=self.hatchSpeedTierStage)

@@ -6,3 +6,10 @@ BoxLayouts:
         source: "images/anthill_surface.png"
         allow_stretch: True
         keep_ratio: False
+
+    Button:
+        text: "+"
+        size: "100dp", "40dp"
+        pos: "350dp", "550dp"
+        # call function from main file with button press
+        on_press: root.addInt()
