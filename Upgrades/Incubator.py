@@ -26,21 +26,21 @@ class Incubator:
 
     def setInitialVariables(self):
         # Hatch multiplier variables
-        self.hatchMultiplierTier = self.incubatorUpgradesFile.get('HatchMultiplier')['hatchMultiplierTier']
-        self.hatchMultiplierTierStage = self.incubatorUpgradesFile.get('HatchMultiplier')['hatchMultiplierTierStage']
-        self.hatchMultiplier = self.incubatorUpgradesFile.get('HatchMultiplier')['value']
+        self.hatchMultiplierTier = self.incubatorUpgradesFile.get('hatchMultiplier')['carryMultiplierTier']
+        self.hatchMultiplierTierStage = self.incubatorUpgradesFile.get('hatchMultiplier')['carryMultiplierTierStage']
+        self.hatchMultiplier = self.incubatorUpgradesFile.get('hatchMultiplier')['value']
 
         # Hatch Speed Variables
-        self.hatchSpeedTier = self.incubatorUpgradesFile.get('HatchSpeed')['hatchSpeedTier']
-        self.hatchSpeedTierStage = self.incubatorUpgradesFile.get('HatchSpeed')['hatchSpeedTierStage']
-        self.hatchSpeed = self.incubatorUpgradesFile.get('HatchSpeed')['value']
+        self.hatchSpeedTier = self.incubatorUpgradesFile.get('hatchSpeed')['antSpeedTier']
+        self.hatchSpeedTierStage = self.incubatorUpgradesFile.get('hatchSpeed')['antSpeedTierStage']
+        self.hatchSpeed = self.incubatorUpgradesFile.get('hatchSpeed')['value']
 
     def createFile(self):
         path = 'C:/Users/pagel/OneDrive/Documents/GitHub/Idle-Ants/SavedData/Incubator.json'
         if not os.path.isfile(path):
-            self.incubatorUpgradesFile.put('HatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
-            self.incubatorUpgradesFile.put('HatchSpeed', value=self.hatchSpeed, hatchSpeedTier=self.hatchSpeedTier, hatchSpeedTierStage=self.hatchSpeedTierStage)
-            print('created')
+            self.incubatorUpgradesFile.put('hatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
+            self.incubatorUpgradesFile.put('hatchSpeed', value=self.hatchSpeed, hatchSpeedTier=self.hatchSpeedTier, hatchSpeedTierStage=self.hatchSpeedTierStage)
+
         else:
             self.setInitialVariables()
 

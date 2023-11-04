@@ -3,7 +3,7 @@ import os.path
 
 class FoodStorage:
     
-    foodStorageFile = JsonStore('FoodStorage.json')
+    foodStorageFile = JsonStore('C:/Users/pagel/OneDrive/Documents/GitHub/Idle-Ants/SavedData/FoodStorage.json')
     currentFoodUnits = 0
     maxFoodCapacity  = 50
     previousMaxCapacity = 50
@@ -13,10 +13,10 @@ class FoodStorage:
         self.loadSavedData()
 
     def createFile(self):
-        path = './FoodStorage.json'
+        path = 'C:/Users/pagel/OneDrive/Documents/GitHub/Idle-Ants/SavedData/FoodStorage.json'
         fileExists = os.path.isfile(path)
         if not fileExists:
-            self.foodStorageFile = JsonStore('FoodStorage.json')
+            self.foodStorageFile = JsonStore('C:/Users/pagel/OneDrive/Documents/GitHub/Idle-Ants/SavedData/FoodStorage.json')
             self.setDefaultVariables()
 
     def loadSavedData(self):
