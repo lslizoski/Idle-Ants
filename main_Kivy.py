@@ -3,7 +3,6 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.widget import Widget
 
 from kivy.graphics import Line
-
 class MainWidget(Widget):
     pass
 class Line1(Widget):
@@ -30,4 +29,5 @@ class AntApp2(App):
         root.add_widget(LineRectangle())
         return root
 
+AntApp().run()
 AntApp().run()
