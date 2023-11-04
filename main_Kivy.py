@@ -4,8 +4,8 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.widget import Widget
 from kivy.uix.image import Image
-
-from Upgrades.Incubator import Incubator
+# comment this line out possibly
+# from Upgrades.Incubator import Incubator
 class BoxLayouts(BoxLayout):
     # Method to be called when a button is pressed
     def showSpeed(self):
