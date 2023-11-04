@@ -1,7 +1,7 @@
 from kivy.storage.jsonstore import JsonStore
 import os.path
 from Promotions import Promotions
-from Upgrades.FoodStorage import FoodStorage
+from FoodStorage import FoodStorage
 
 class QueenUpgrades:
 
@@ -37,10 +37,12 @@ class QueenUpgrades:
         self.eggMultiplier = self.queenUpgradesFile.get('eggMultiplier')['value']
         self.eggMultiplierTier = self.queenUpgradesFile.get('eggMultiplier')['eggMultiplierTier']
         self.eggMultiplierTierStage = self.queenUpgradesFile.get('eggMultiplier')['eggMultiplierTierStage']
+        self.eggCounter = self.queenUpgradesFile.get('eggCounter')['value']
 
     def setDefaultVariables(self):
         self.queenUpgradesFile.put('eggLaySpeed', value=self.eggLaySpeed, eggLaySpeedTier=self.eggLaySpeedTier, eggLaySpeedTierStage=self.eggLaySpeedTierStage)
         self.queenUpgradesFile.put('eggMultiplier', value=self.eggMultiplier, eggMultiplierTier=self.eggMultiplierTier, eggMultiplierTierStage=self.eggMultiplierTierStage)
+        self.queenUpgradesFile.put('eggCounter', value=self.eggCounter)
 
     def upgradeEggLaySpeed(self):
         if (self.foodStorage.getFood() >= 50):
@@ -59,3 +61,10 @@ class QueenUpgrades:
             self.queenUpgradesFile.put('eggMultiplier', value=self.eggMultiplier, eggMultiplierTier=self.eggMultiplierTier, eggMultiplierTierStage=self.eggMultiplierTierStage)
         else:
             print("Not enough food resources.")
+
+    def addEggs(self, amount):
+        self.eggCounter += amount
+        self.queenUpgradesFile.put('eggCounter', value=self.eggCounter)
+
+    def getEggLaySpeed(self):
+        return self.queenUpgradesFile.get('eggLaySpeed')['value']

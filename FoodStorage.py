@@ -1,6 +1,6 @@
 from kivy.storage.jsonstore import JsonStore
 import os.path
-from Upgrades.Incubator import Incubator
+from Incubator import Incubator
 
 class FoodStorage:
     

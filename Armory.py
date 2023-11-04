@@ -1,5 +1,5 @@
 from kivy.storage.jsonstore import JsonStore
-from Upgrades.Promotions import Promotions
+from Promotions import Promotions
 import os
 
 class Armory:
