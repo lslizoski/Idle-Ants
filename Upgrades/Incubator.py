@@ -1,5 +1,4 @@
 from kivy.storage.jsonstore import JsonStore
-from kivy.clock import Clock
 from Promotions import Promotions
 import os
 
@@ -21,6 +20,8 @@ class Incubator:
     hatchSpeed = 60
     increasePercent = 0.025
 
+    antCounter = 0
+
 
     def __init__(self):
         self.createFile()
@@ -28,7 +29,7 @@ class Incubator:
     def getSpeed(self):
         return str(self.hatchSpeed)
 
-    def setInitialVariables(self):
+    def loadSaveData(self):
         # Hatch multiplier variables
         self.hatchMultiplierTier = self.incubatorUpgradesFile.get('hatchMultiplier')['hatchMultiplierTier']
         self.hatchMultiplierTierStage = self.incubatorUpgradesFile.get('hatchMultiplier')['hatchMultiplierTierStage']
@@ -39,14 +40,17 @@ class Incubator:
         self.hatchSpeedTierStage = self.incubatorUpgradesFile.get('hatchSpeed')['hatchSpeedTierStage']
         self.hatchSpeed = self.incubatorUpgradesFile.get('hatchSpeed')['value']
 
+        self.antCounter = self.incubatorUpgradesFile.get('antCounter')['value']
+
     def createFile(self):
         path = 'Incubator.json'
         if not os.path.isfile(path):
             self.incubatorUpgradesFile.put('hatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
             self.incubatorUpgradesFile.put('hatchSpeed', value=self.hatchSpeed, hatchSpeedTier=self.hatchSpeedTier, hatchSpeedTierStage=self.hatchSpeedTierStage)
+            self.incubatorUpgradesFile.put('antCounter', value=self.antCounter)
 
         else:
-            self.setInitialVariables()
+            self.loadSaveData()
 
     def upgradeHatchSpeed(self):
         self.hatchSpeed -= self.hatchSpeed * self.increasePercent
@@ -58,5 +62,7 @@ class Incubator:
         self.hatchMultiplierTier, self.hatchMultiplierTierStage, self.hatchMultiplier = Promotions().multiplier(self.hatchMultiplierTier, self.hatchMultiplierTierStage, self.hatchMultiplier)
         self.incubatorUpgradesFile.put('HatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
 
-
-incubator = Incubator()
+    def addAnt(self, amount):
+        self.antCounter += amount
+        self.incubatorUpgradesFile.put('antCounter', value=self.antCounter)
+        print(self.incubatorUpgradesFile.get('antCounter')['value'])
