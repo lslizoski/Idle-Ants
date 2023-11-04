@@ -1,12 +1,12 @@
 from kivy.storage.jsonstore import JsonStore
-from Upgrades.Promotions import Promotions
+from Promotions import Promotions
 import os
 
 
 class Armory:
 
     # Open json file for incubator room
-    armoryUpgradesFile = JsonStore('../Armory.json')
+    armoryUpgradesFile = JsonStore('Armory.json')
 
     # Ant Carry Weight multiplier
     carryMultiplierTier = 1
@@ -36,7 +36,7 @@ class Armory:
         self.antSpeed = self.armoryUpgradesFile.get('antSpeed')['value']
 
     def createFile(self):
-        path = '../Armory.json'
+        path = 'Armory.json'
         if not os.path.isfile(path):
             self.armoryUpgradesFile.put('carryMultiplier', value=self.carryMultiplier, carryMultiplierTier=self.carryMultiplierTier, carryMultiplierTierStage=self.carryMultiplierTierStage)
             self.armoryUpgradesFile.put('antSpeed', value=self.antSpeed, antSpeedTier=self.antSpeedTier, antSpeedTierStage=self.antSpeedTierStage)

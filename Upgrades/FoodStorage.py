@@ -1,12 +1,11 @@
 from kivy.storage.jsonstore import JsonStore
 import os.path
 
-
 class FoodStorage:
     
     foodStorageFile = JsonStore('FoodStorage.json')
     currentFoodUnits = 0
-    maxFoodCapacity = 50
+    maxFoodCapacity  = 50
     previousMaxCapacity = 50
     
     def __init__(self):
@@ -17,7 +16,7 @@ class FoodStorage:
         path = 'FoodStorage.json'
         fileExists = os.path.isfile(path)
         if not fileExists:
-            self.foodStorageFile = JsonStore('FoodStorage.json')
+            self.foodStorageFile = JsonStore('C:/Users/pagel/OneDrive/Documents/GitHub/Idle-Ants/SavedData/FoodStorage.json')
             self.setDefaultVariables()
 
     def loadSavedData(self):
