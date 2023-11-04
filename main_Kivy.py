@@ -3,7 +3,6 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.widget import Widget
-# from Upgrades.Incubator import Incubator
 from kivy.uix.image import Image
 
 # from Upgrades.Incubator import Incubator
@@ -15,10 +14,7 @@ class BoxLayouts(BoxLayout):
     pass
 
 class MainWidget(Widget):
-    # Create Method that can be called by with the buttons
-    def addInt(self):
-        self.incubator = Incubator()
-        self.incubator.upgradeHatchSpeed()
+    pass
 
 class Line1(Widget):
     pass

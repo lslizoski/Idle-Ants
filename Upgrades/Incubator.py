@@ -1,13 +1,12 @@
 from kivy.storage.jsonstore import JsonStore
-from kivy.clock import Clock
-from Promotions import Promotions
+from Upgrades.Promotions import Promotions
 import os
 
 
 class Incubator:
 
     # Open json file for incubator room
-    incubatorUpgradesFile = JsonStore('Incubator.json')
+    incubatorUpgradesFile = JsonStore('../Incubator.json')
 
     # Hatch multiplier
     hatchMultiplierTier = 1
@@ -26,7 +25,7 @@ class Incubator:
         self.createFile()
 
     def getSpeed(self):
-        return str(self.hatchSpeed)
+        return self.hatchSpeed
 
     def setInitialVariables(self):
         # Hatch multiplier variables
@@ -40,7 +39,7 @@ class Incubator:
         self.hatchSpeed = self.incubatorUpgradesFile.get('hatchSpeed')['value']
 
     def createFile(self):
-        path = 'Incubator.json'
+        path = '../Incubator.json'
         if not os.path.isfile(path):
             self.incubatorUpgradesFile.put('hatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
             self.incubatorUpgradesFile.put('hatchSpeed', value=self.hatchSpeed, hatchSpeedTier=self.hatchSpeedTier, hatchSpeedTierStage=self.hatchSpeedTierStage)
@@ -59,4 +58,4 @@ class Incubator:
         self.incubatorUpgradesFile.put('HatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
 
 
-incubator = Incubator()
+

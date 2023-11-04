@@ -1,10 +1,11 @@
 from kivy.storage.jsonstore import JsonStore
 import os.path
-from Promotions import Promotions
+from Upgrades.Promotions import Promotions
+
 
 class QueenUpgrades:
 
-    queenUpgradesFile = JsonStore('QueenUpgrades.json')
+    queenUpgradesFile = JsonStore('../QueenUpgrades.json')
     eggLaySpeed = 60
     eggMultiplier = 1
     upgradePercentage = 0.025
@@ -21,7 +22,7 @@ class QueenUpgrades:
         self.upgradeEggLaySpeed()
 
     def createFile(self):
-        path = 'QueenUpgrades.json'
+        path = '../QueenUpgrades.json'
         fileExists = os.path.isfile(path)
         if not fileExists:
             self.setDefaultVariables()
