@@ -7,7 +7,7 @@ import os
 class Incubator:
 
     # Open json file for incubator room
-    incubatorUpgradesFile = JsonStore('../Incubator.json')
+    incubatorUpgradesFile = JsonStore('Incubator.json')
 
     # Hatch multiplier
     hatchMultiplierTier = 1
@@ -40,7 +40,7 @@ class Incubator:
         self.hatchSpeed = self.incubatorUpgradesFile.get('hatchSpeed')['value']
 
     def createFile(self):
-        path = '../Incubator.json'
+        path = 'Incubator.json'
         if not os.path.isfile(path):
             self.incubatorUpgradesFile.put('hatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
             self.incubatorUpgradesFile.put('hatchSpeed', value=self.hatchSpeed, hatchSpeedTier=self.hatchSpeedTier, hatchSpeedTierStage=self.hatchSpeedTierStage)
