@@ -1,21 +1,39 @@
-MainWidget:
+BoxLayouts:
+<BoxLayouts>:
+    orientation: "vertical"
 
-<MainWidget>:
-    canvas:
-        Color:
-            rgba: 1, .1, .1, .9
-        Line:
-            width: 2.
-            ellipse: (self.x, self.y, self.width, self.height)
+    BoxLayout:
+        size_hint: 1, .25
+        orientation: "horizontal"
 
-    Button:
-        text: "+"
-        size: "100dp", "40dp"
-        pos: "350dp", "550dp"
-        # call function from main file with button press
-        on_press: root.showSpeed()
+        Button:
+            text: "+"
+            size: "100dp", "40dp"
+            pos: "350dp", "550dp"
 
-    Button:
-        text: "+"
-        size: "100dp", "40dp"
-        pos: "350dp", "20dp"
+        Button:
+            text: "+"
+            size: "100dp", "40dp"
+            pos: "350dp", "20dp"
+
+        Label:
+            text: '1'
+            size_hint: .33, 1
+            pos_hint: {'x':0, 'top': 1}
+
+        Label:
+            text: "2"
+            size_hint: .34, 1
+            pos_hint: {'x':.33, 'top': 1}
+
+        Label:
+            text: "3"
+            size_hint: .33, 1
+            pos_hint: {'right':1, 'top': 1}
+
+    Image:
+        source: "images/anthill_tunnels.png"
+        allow_stretch: True
+        keep_ratio: False
+        size_hint: 1, 3
+
