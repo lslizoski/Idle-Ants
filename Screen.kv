@@ -44,6 +44,7 @@ WindowManager:
             size_hint: .33, 1
             pos_hint: {'right':1, 'top': 1.45}
 
+        # Button to go underground
         Button:
             text: "v\nv"
             size_hint: .25, .05
@@ -53,6 +54,7 @@ WindowManager:
 				root.manager.transition.direction = 'up'
 				root.manager.transition.duration = 1
 				root.manager.current = 'Menu'
+		    background_color: 1, 0, 1, 1
 
 <Menu>:
     name: "Menu"
@@ -112,6 +114,7 @@ WindowManager:
                 root.manager.transition.direction = 'down'
                 root.manager.transition.duration = 1
                 root.manager.current = 'Home'
+            background_color: 1, 0, 1, 1
 
 <Queen>:
     name: "Queen"
@@ -158,6 +161,7 @@ WindowManager:
             on_release:
                 root.queenEggSpeedUpgradeButton()
                 root.updateCounters()
+            background_color: 1, 0, 1, 1
 
 
         Button:
@@ -169,6 +173,7 @@ WindowManager:
             on_release:
                 root.queenMultiplierUpgradeButton()
                 root.updateCounters()
+            background_color: 1, 0, 1, 1
 
 
         Button:
@@ -179,6 +184,7 @@ WindowManager:
                 root.manager.transition.direction = 'left'
                 root.manager.transition.duration = 1
                 root.manager.current = 'Menu'
+            background_color: 1, 0, 1, 1
 
 <Incubator>:
     name: "Incubator"
@@ -225,6 +231,7 @@ WindowManager:
             on_release:
                 root.incubatorHatchSpeedUpgradeButton()
                 root.updateCounters()
+            background_color: 1, 0, 1, 1
 
         Button:
             text: "MULTI HATCH"
@@ -235,6 +242,7 @@ WindowManager:
             on_release:
                 root.incubatorMultiplierUpgradeButton()
                 root.updateCounters()
+            background_color: 1, 0, 1, 1
 
         Button:
             text: "<--"
@@ -244,6 +252,7 @@ WindowManager:
                 root.manager.transition.direction = 'right'
                 root.manager.transition.duration = 1
                 root.manager.current = 'Menu'
+            background_color: 1, 0, 1, 1
 
 <Storage>:
     name: "Storage"
@@ -276,6 +285,7 @@ WindowManager:
             font_size: 45
             font_name: "fonts/Ant.ttf"
             on_release: root.foodUpgradeButton()
+            background_color: 1, 0, 1, 1
 
         Button:
             text: "MULTI GATHER"
@@ -286,6 +296,7 @@ WindowManager:
             on_release:
                 root.foodMultiplyButton()
                 root.updateCounters()
+            background_color: 1, 0, 1, 1
 
         Button:
             text: "-->"
@@ -295,3 +306,4 @@ WindowManager:
                 root.manager.transition.direction = 'left'
                 root.manager.transition.duration = 1
                 root.manager.current = 'Menu'
+            background_color: 1, 0, 1, 1
