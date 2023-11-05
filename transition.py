@@ -62,6 +62,7 @@ class Queen(Screen):
         self.ids.multi_stage.text = str('STAGE:' + str(self.queenUpgrades.getLayMultiTierStage()))
 
 class Incubator(Screen):
+    game = Game()
     incubator = Incubator()
 
     def __init__(self, **kw):
@@ -69,6 +70,9 @@ class Incubator(Screen):
 
     def incubatorMultiplierUpgradeButton(self):
         self.incubator.upgradeHatchMultiplier()
+        if self.game.sound2:
+            self.game.sound2.volume = 1
+            self.game.sound2.play()
 
     def incubatorHatchSpeedUpgradeButton(self):
         self.incubator.upgradeHatchSpeed()
@@ -82,8 +86,16 @@ class Incubator(Screen):
 
 class Storage(Screen):
     foodStorage = FoodStorage()
+
     def foodUpgradeButton(self):
         self.foodStorage.upgradeStorage()
+
+    def foodMultiplyButton(self):
+        self.foodStorage.upgradeFoodMultiplier()
+
+    def updateCounters(self):
+        self.ids.multi_tier.text = str('TIER:' + str(self.foodStorage.getMultiplyTier()))
+        self.ids.multi_stage.text = str('STAGE:' + str(self.foodStorage.getMultiplyTierStage()))
 
 
 file = Builder.load_file('Screen.kv')
