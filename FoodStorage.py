@@ -1,5 +1,6 @@
 from kivy.storage.jsonstore import JsonStore
 import os.path
+from Promotions import Promotions
 
 class FoodStorage:
     
@@ -7,6 +8,10 @@ class FoodStorage:
     currentFoodUnits = 0
     maxFoodCapacity  = 50
     previousMaxCapacity = 50
+    foodMultiplier = 1
+
+    foodMultiplierTier = 1
+    foodMultiplierTierStage = 0
 
     incubatorUpgradesFile = JsonStore('Incubator.json')
 
@@ -26,16 +31,22 @@ class FoodStorage:
         self.maxFoodCapacity = self.foodStorageFile.get('maxFoodCapacity')['value']
         self.previousMaxCapacity = self.foodStorageFile.get('previousMaxCapacity')['value']
 
+        self.foodMultiplier = self.foodStorageFile.get('foodMultiplier')['value']
+        self.foodMultiplierTier = self.foodStorageFile.get('foodMultiplier')['foodMultiplierTier']
+        self.foodMultiplierTierStage = self.foodStorageFile.get('foodMultiplier')['foodMultiplierTierStage']
+
     def setDefaultVariables(self):
         self.foodStorageFile.put('currentFoodUnits', value=self.currentFoodUnits)
         self.foodStorageFile.put('maxFoodCapacity', value=self.maxFoodCapacity)
         self.foodStorageFile.put('previousMaxCapacity', value=self.previousMaxCapacity)
+        self.foodStorageFile.put('foodMultiplier', value=self.foodMultiplier, foodMultiplierTier=self.foodMultiplierTier, foodMultiplierTierStage=self.foodMultiplierTierStage)
+
 
     def addFood(self, foodToAdd):
-        if (self.currentFoodUnits + foodToAdd) >= self.maxFoodCapacity:
+        if (self.currentFoodUnits + foodToAdd * self.foodMultiplier) >= self.maxFoodCapacity:
             self.currentFoodUnits = self.maxFoodCapacity
         else:
-            self.currentFoodUnits += foodToAdd
+            self.currentFoodUnits += foodToAdd * self.foodMultiplier
         self.foodStorageFile.put('currentFoodUnits', value=self.currentFoodUnits)
 
     def upgradeStorage(self):
@@ -46,6 +57,15 @@ class FoodStorage:
             self.foodStorageFile.put('previousMaxCapacity', value=self.previousMaxCapacity)
         else:
             print("Not enough ant resources.")
+
+    def upgradeFoodMultiplier(self):
+        if (self.getAnts() >= 50):
+            self.setAnts(self.getAnts() - 50)
+            self.foodMultiplier =  self.foodMultiplierTier
+            self.foodMultiplierTier, self.foodMultiplierTierStage, self.foodMultiplier = Promotions().multiplier(self.foodMultiplierTier, self.foodMultiplierTierStage, self.foodMultiplier)
+            self.foodStorageFile.put('foodMultiplier', value=self.foodMultiplier, foodMultiplierTier=self.foodMultiplierTier, foodMultiplierTierStage=self.foodMultiplierTierStage)
+        else:
+            print("Not enough food resources.")
 
     def getAnts(self):
         return self.incubatorUpgradesFile.get('antCounter')['value']
