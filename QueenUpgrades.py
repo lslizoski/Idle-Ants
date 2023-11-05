@@ -45,6 +45,7 @@ class QueenUpgrades:
         self.queenUpgradesFile.put('eggCounter', value=self.eggCounter)
 
     def upgradeEggLaySpeed(self):
+        print(self.eggLaySpeed * self.upgradePercentage)
         if (self.foodStorage.getFood() >= 50):
             self.foodStorage.setFood(self.foodStorage.getFood() - 50)
             self.eggLaySpeed -= self.eggLaySpeed * self.upgradePercentage
@@ -87,3 +88,6 @@ class QueenUpgrades:
 
     def getLayMultiTierStage(self):
         return self.queenUpgradesFile.get('eggMultiplier')['eggMultiplierTierStage']
+
+queen = QueenUpgrades()
+queen.upgradeEggLaySpeed()

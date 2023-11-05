@@ -64,13 +64,16 @@ class Home(Screen):
 
 
 class Menu(Screen):
-    def __init__(self, **kw):
-        super().__init__(**kw)
+    pass
 
 
 class Queen(Screen):
     game = Game()
     queenUpgrades = QueenUpgrades()
+
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        Clock.schedule_interval(self.updateCounters, 1)
 
     def queenEggSpeedUpgradeButton(self):
         self.queenUpgrades.upgradeEggLaySpeed()
@@ -81,7 +84,7 @@ class Queen(Screen):
             self.game.sound.volume = 1
             self.game.sound.play()
 
-    def updateCounters(self):
+    def updateCounters(self, *args):
         self.ids.speed_tier.text = str('TIER:' + str(self.queenUpgrades.getLaySpeedTier()))
         self.ids.speed_stage.text = str('STAGE:' + str(self.queenUpgrades.getLaySpeedTierStage()))
         self.ids.multi_tier.text = str('TIER:' + str(self.queenUpgrades.getLayMultiTier()))
@@ -93,6 +96,7 @@ class Incubator(Screen):
 
     def __init__(self, **kw):
         super().__init__(**kw)
+        Clock.schedule_interval(self.updateCounters, 1)
 
     def incubatorMultiplierUpgradeButton(self):
         self.incubator.upgradeHatchMultiplier()
@@ -103,7 +107,7 @@ class Incubator(Screen):
     def incubatorHatchSpeedUpgradeButton(self):
         self.incubator.upgradeHatchSpeed()
 
-    def updateCounters(self):
+    def updateCounters(self, *args):
         self.ids.speed_tier.text = str('TIER:' + str(self.incubator.getHatchSpeedTier()))
         self.ids.speed_stage.text = str('STAGE:' + str(self.incubator.getHatchSpeedTierStage()))
         self.ids.multi_tier.text = str('TIER:' + str(self.incubator.getHatchMultiTier()))
@@ -113,13 +117,17 @@ class Incubator(Screen):
 class Storage(Screen):
     foodStorage = FoodStorage()
 
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        Clock.schedule_interval(self.updateCounters, 1)
+
     def foodUpgradeButton(self):
         self.foodStorage.upgradeStorage()
 
     def foodMultiplyButton(self):
         self.foodStorage.upgradeFoodMultiplier()
 
-    def updateCounters(self):
+    def updateCounters(self, *args):
         self.ids.multi_tier.text = str('TIER:' + str(self.foodStorage.getMultiplyTier()))
         self.ids.multi_stage.text = str('STAGE:' + str(self.foodStorage.getMultiplyTierStage()))
 
