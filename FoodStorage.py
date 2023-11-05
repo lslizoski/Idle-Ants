@@ -33,6 +33,7 @@ class FoodStorage:
 
     def addFood(self, foodToAdd):
         self.currentFoodUnits = self.storageUpgradesFile.get('currentFoodUnits')['value']
+        self.maxFoodCapacity = self.storageUpgradesFile.get('maxFoodCapacity')['value']
         if (self.currentFoodUnits + foodToAdd * self.foodMultiplier) >= self.maxFoodCapacity:
             self.currentFoodUnits = self.maxFoodCapacity
         else:
@@ -46,6 +47,7 @@ class FoodStorage:
             self.maxFoodCapacity += 50
             self.antCounter -= 50
             self.storageUpgradesFile.put('maxFoodCapacity', value=self.maxFoodCapacity)
+            incubatorUpgradesFile.put('antCounter', value=self.antCounter)
         else:
             print("Not enough ant resources.")
 
@@ -68,10 +70,6 @@ class FoodStorage:
 
     def getMaxFood(self):
         return self.storageUpgradesFile.get('maxFoodCapacity')['value']
-
-    def setFood(self, addAmount):
-        self.currentFoodUnits += addAmount
-        self.storageUpgradesFile.put('currentFoodUnits', value=self.currentFoodUnits)
 
     def getMultiplyTier(self):
         return self.storageUpgradesFile.get('foodMultiplier')['foodMultiplierTier']

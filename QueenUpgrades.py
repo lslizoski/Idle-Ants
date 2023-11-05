@@ -47,7 +47,7 @@ class QueenUpgrades:
     def upgradeEggLaySpeed(self):
         print(self.eggLaySpeed * self.upgradePercentage)
         if (self.foodStorage.getFood() >= 50):
-            self.foodStorage.setFood(self.foodStorage.getFood() - 50)
+            self.foodStorage.addFood(self.foodStorage.getFood() - 50)
             self.eggLaySpeed -= self.eggLaySpeed * self.upgradePercentage
             self.eggLaySpeedTier, self.eggLaySpeedTierStage, self.upgradePercentage = Promotions().percentage(self.eggLaySpeedTier, self.eggLaySpeedTierStage, self.upgradePercentage)
             self.queenUpgradesFile.put('eggLaySpeed', value=self.eggLaySpeed, eggLaySpeedTier=self.eggLaySpeedTier, eggLaySpeedTierStage=self.eggLaySpeedTierStage)

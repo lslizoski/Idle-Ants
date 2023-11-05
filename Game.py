@@ -26,7 +26,7 @@ class Game:
 
     def hatchEgg(self):
         self.incubator.setAnts(self.incubator.hatchMultiplier)
-        self.foodStorage.setFood(self.foodGenerator.chooseFood() * self.foodStorage.getFoodMultiplier())
+        self.foodStorage.addFood(self.foodGenerator.chooseFood() * self.foodStorage.getFoodMultiplier())
 
     def foodUpgradeButton(self):
         self.foodStorage.upgradeStorage()
