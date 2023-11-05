@@ -21,17 +21,13 @@ class Home(Screen):
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades()
 
-    antCount = incubator.getAnts()
-    food_count = foodStorage.getFood()
-    egg_count = queenUpgrades.getEggs()
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
     def updateCounters(self):
-        self.ids.ant_count.text = str(self.antCount)
-        self.ids.food_count.text = str(self.food_count)
-        self.ids.egg_count.text = str(self.egg_count)
+        self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
+        self.ids.food_count.text = str('Food: ' + str(self.foodStorage.getFood()))
+        self.ids.egg_count.text = str('Eggs: ' + str(self.queenUpgrades.getEggs()))
 
     def setAnt(self):
         self.incubator.setAnts(1)
