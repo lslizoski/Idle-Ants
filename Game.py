@@ -11,6 +11,7 @@ class Game:
     foodStorage = FoodStorage()
     armory = Armory()
     sound = SoundLoader.load('Audio/FoodMunch.mp3')
+    sound2 = SoundLoader.load('Audio/EggSqulech.mp3')
 
     def __init__(self):
         pass
@@ -20,6 +21,9 @@ class Game:
 
     def layEgg(self):
         self.queenUpgrades.setEggs(self.queenUpgrades.getEggs() + self.queenUpgrades.eggMultiplier)
+
+    def hatchEgg(self):
+        self.incubator.setAnts(self.incubator.hatchMultiplier)
 
     def foodUpgradeButton(self):
         self.foodStorage.upgradeStorage()

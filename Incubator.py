@@ -28,8 +28,8 @@ class Incubator:
     def __init__(self):
         self.createFile()
 
-    def getSpeed(self):
-        return str(self.hatchSpeed)
+    def getHatchSpeed(self):
+        return self.hatchSpeed
 
     def loadSaveData(self):
         # Hatch multiplier variables
@@ -68,8 +68,8 @@ class Incubator:
         self.queenUpgrades.setEggs(self.queenUpgrades.getEggs() - 1)
         self.setAnts(self.getAnts() + self.hatchMultiplier)
 
-    def setAnts(self, amount):
-        self.antCounter += amount
+    def setAnts(self, addAmount):
+        self.antCounter += addAmount
         self.incubatorUpgradesFile.put('antCounter', value=self.antCounter)
 
     def getAnts(self):

@@ -16,7 +16,9 @@ WindowManager:
             text: "You should not see this"
             size_hint: .45, 0.30
             pos_hint: {'center_x': 0.5, 'y': 0.15}
-            on_release: root.setAnt()
+            on_release:
+                root.setAnt()
+                root.updateCounters()
 
         Image:
             source: "images/anthill_surface.png"
@@ -252,6 +254,18 @@ WindowManager:
             keep_ratio: False
             fit_mode: "contain"
 
+        Label:
+            id: multi_tier
+            text: "TIER: "
+            size_hint: .20, .10
+            pos_hint: {'right': 1, 'y': 0.17}
+
+        Label:
+            id: multi_stage
+            text: "STAGE: "
+            size_hint: .20, .10
+            pos_hint: {'right': 1, 'y': 0.14}
+
         Button:
             text: "UPGRADE CAP"
             size_hint: .5, .15
@@ -266,6 +280,9 @@ WindowManager:
             pos_hint: {'right': 1, 'bottom': 1}
             font_size: 45
             font_name: "fonts/Ant.ttf"
+            on_release:
+                root.foodMultiplyButton()
+                root.updateCounters()
 
         Button:
             text: "-->"

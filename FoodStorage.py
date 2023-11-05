@@ -78,3 +78,9 @@ class FoodStorage:
 
     def setFood(self, totalAmount):
         self.foodStorageFile.put('currentFoodUnits', value=totalAmount)
+
+    def getMultiplyTier(self):
+        return self.foodStorageFile.get('foodMultiplier')['foodMultiplierTier']
+
+    def getMultiplyTierStage(self):
+        return self.foodStorageFile.get('foodMultiplier')['foodMultiplierTierStage']

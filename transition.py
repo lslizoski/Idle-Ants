@@ -21,17 +21,13 @@ class Home(Screen):
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades()
 
-    antCount = incubator.getAnts()
-    food_count = foodStorage.getFood()
-    egg_count = queenUpgrades.getEggs()
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
     def updateCounters(self):
-        self.ids.ant_count.text = str(self.antCount)
-        self.ids.food_count.text = str(self.food_count)
-        self.ids.egg_count.text = str(self.egg_count)
+        self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
+        self.ids.food_count.text = str('Food: ' + str(self.foodStorage.getFood()))
+        self.ids.egg_count.text = str('Eggs: ' + str(self.queenUpgrades.getEggs()))
 
     def setAnt(self):
         self.incubator.setAnts(1)
@@ -62,6 +58,7 @@ class Queen(Screen):
         self.ids.multi_stage.text = str('STAGE:' + str(self.queenUpgrades.getLayMultiTierStage()))
 
 class Incubator(Screen):
+    game = Game()
     incubator = Incubator()
 
     def __init__(self, **kw):
@@ -69,6 +66,9 @@ class Incubator(Screen):
 
     def incubatorMultiplierUpgradeButton(self):
         self.incubator.upgradeHatchMultiplier()
+        if self.game.sound2:
+            self.game.sound2.volume = 1
+            self.game.sound2.play()
 
     def incubatorHatchSpeedUpgradeButton(self):
         self.incubator.upgradeHatchSpeed()
@@ -82,8 +82,16 @@ class Incubator(Screen):
 
 class Storage(Screen):
     foodStorage = FoodStorage()
+
     def foodUpgradeButton(self):
         self.foodStorage.upgradeStorage()
+
+    def foodMultiplyButton(self):
+        self.foodStorage.upgradeFoodMultiplier()
+
+    def updateCounters(self):
+        self.ids.multi_tier.text = str('TIER:' + str(self.foodStorage.getMultiplyTier()))
+        self.ids.multi_stage.text = str('STAGE:' + str(self.foodStorage.getMultiplyTierStage()))
 
 
 file = Builder.load_file('Screen.kv')
