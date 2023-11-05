@@ -26,7 +26,7 @@ class Home(Screen):
 
     def updateCounters(self):
         self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
-        self.ids.food_count.text = str('Food: ' + str(self.foodStorage.getFood()))
+        self.ids.food_count.text = str('Food: ' + str(self.foodStorage.getFood()) + '/' + str(self.foodStorage.getMaxFood()))
         self.ids.egg_count.text = str('Eggs: ' + str(self.queenUpgrades.getEggs()))
 
     def setAnt(self):

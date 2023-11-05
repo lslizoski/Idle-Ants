@@ -76,6 +76,9 @@ class FoodStorage:
     def getFood(self):
         return self.foodStorageFile.get('currentFoodUnits')['value']
 
+    def getMaxFood(self):
+        return self.foodStorageFile.get('maxFoodCapacity')['value']
+
     def setFood(self, totalAmount):
         self.foodStorageFile.put('currentFoodUnits', value=totalAmount)
 
