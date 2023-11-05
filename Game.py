@@ -1,6 +1,7 @@
 from kivy.core.audio import SoundLoader
 from Armory import Armory
 from FoodStorage import FoodStorage
+from GameInteractions.FoodGenerator import FoodGenerator
 from Incubator import Incubator
 from QueenUpgrades import QueenUpgrades
 
@@ -9,6 +10,7 @@ class Game:
     queenUpgrades = QueenUpgrades()
     incubator = Incubator()
     foodStorage = FoodStorage()
+    foodGenerator = FoodGenerator()
     armory = Armory()
     sound = SoundLoader.load('Audio/FoodMunch.mp3')
     sound2 = SoundLoader.load('Audio/EggSqulech.mp3')
@@ -20,10 +22,11 @@ class Game:
         pass
 
     def layEgg(self):
-        self.queenUpgrades.setEggs(self.queenUpgrades.getEggs() + self.queenUpgrades.eggMultiplier)
+        self.queenUpgrades.setEggs(self.queenUpgrades.eggMultiplier)
 
     def hatchEgg(self):
         self.incubator.setAnts(self.incubator.hatchMultiplier)
+        self.foodStorage.setFood(self.foodGenerator.chooseFood() * self.foodStorage.getFoodMultiplier())
 
     def foodUpgradeButton(self):
         self.foodStorage.upgradeStorage()

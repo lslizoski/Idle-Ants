@@ -79,11 +79,15 @@ class FoodStorage:
     def getMaxFood(self):
         return self.foodStorageFile.get('maxFoodCapacity')['value']
 
-    def setFood(self, totalAmount):
-        self.foodStorageFile.put('currentFoodUnits', value=totalAmount)
+    def setFood(self, addAmount):
+        self.currentFoodUnits += addAmount
+        self.foodStorageFile.put('currentFoodUnits', value=self.currentFoodUnits)
 
     def getMultiplyTier(self):
         return self.foodStorageFile.get('foodMultiplier')['foodMultiplierTier']
 
     def getMultiplyTierStage(self):
         return self.foodStorageFile.get('foodMultiplier')['foodMultiplierTierStage']
+
+    def getFoodMultiplier(self):
+        return self.foodStorageFile.get('foodMultiplier')['value']

@@ -38,6 +38,7 @@ class Home(Screen):
         Clock.schedule_interval(self.timers, 1)
 
     def timers(self, interval):
+        self.updateCounters()
         if (self.clock % round(self.game.incubator.getHatchSpeed()) == 0):
             self.game.hatchEgg()
             print("Hatch")
