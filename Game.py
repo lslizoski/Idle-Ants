@@ -56,3 +56,5 @@ class Game:
 
     def getArmory(self):
         return self.armory
+
+game = Game().queenMultiplierUpgradeButton()

@@ -1,0 +1,247 @@
+WindowManager:
+    Home:
+    Menu:
+    Incubator:
+    Queen:
+    Storage:
+
+<Home>:
+    name: "Home"
+
+	FloatLayout:
+
+        orientation: "vertical"
+
+        Button:
+            text: "You should not see this"
+            size_hint: .45, 0.30
+            pos_hint: {'center_x': 0.5, 'y': 0.15}
+
+        Image:
+            source: "images/anthill_surface.png"
+            allow_stretch: True
+            keep_ratio: False
+            fit_mode: "contain"
+
+        Label:
+            id: ant_count
+            text: '1'
+            size_hint: .34, 1
+            pos_hint: {'x':0, 'top': 1.45}
+
+        Label:
+            id: food_count
+            text: "2"
+            size_hint: .34, 1
+            pos_hint: {'x':.33, 'top': 1.45}
+
+        Label:
+            id: egg_count
+            text: "3"
+            size_hint: .33, 1
+            pos_hint: {'right':1, 'top': 1.45}
+
+        Button:
+            text: "v\nv"
+            size_hint: .25, .05
+            pos_hint: {'center_x': 0.5}
+            on_release:
+                root.updateCounters()
+				root.manager.transition.direction = 'up'
+				root.manager.transition.duration = 1
+				root.manager.current = 'Menu'
+
+<Menu>:
+    name: "Menu"
+
+	FloatLayout:
+
+        orientation: "vertical"
+
+        Image:
+            source: "images/anthill_tunnels.png"
+            allow_stretch: True
+            keep_ratio: False
+            fit_mode: "contain"
+
+
+        # Button to go to food room
+        Button:
+            text: "<--"
+            size_hint: .20, .10
+            pos_hint: {'left': 1, 'y': 0.55}
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.manager.transition.duration = 1
+                root.manager.current = 'Storage'
+
+
+        # Button to go to Queen
+        Button:
+            text: "<--"
+            size_hint: .30, .10
+            pos_hint: {'left': 1, 'y': 0.07}
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.manager.transition.duration = 1
+                root.manager.current = 'Queen'
+
+
+        # Button to go to incubator
+        Button:
+            text: "-->"
+            size_hint: .20, .10
+            pos_hint: {'right': 1, 'y': 0.07}
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = 1
+                root.manager.current = 'Incubator'
+
+
+        #Button to go to surface
+        Button:
+            text: "^\n^"
+            size_hint: .25, .05
+            pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+            on_release:
+                root.manager.transition.direction = 'down'
+                root.manager.transition.duration = 1
+                root.manager.current = 'Home'
+
+<Queen>:
+    name: "Queen"
+
+    FloatLayout:
+        orientation: "vertical"
+
+        Image:
+            source: "images/QueenInsideKitchen.png"
+            allow_stretch: True
+            keep_ratio: False
+            fit_mode: "contain"
+
+        Label:
+            text: "TIER: "
+            size_hint: .20, .10
+            pos_hint: {'left': 1, 'y': 0.17}
+
+        Label:
+            text: "STAGE: "
+            size_hint: .20, .10
+            pos_hint: {'left': 1, 'y': 0.14}
+
+        Label:
+            text: "TIER: "
+            size_hint: .20, .10
+            pos_hint: {'right': 1, 'y': 0.17}
+
+        Label:
+            text: "STAGE: "
+            size_hint: .20, .10
+            pos_hint: {'right': 1, 'y': 0.14}
+
+        Button:
+            text: "LAX SPEED"
+            size_hint: .50, .15
+            pos_hint: {'left': 1,'bottom': 1}
+            font_size: 50
+            font_name: "fonts/Ant.ttf"
+
+        Button:
+            text: "MULTI EGG"
+            size_hint: .50, .15
+            pos_hint: {'right': 1, 'bottom': 1}
+            font_size: 50
+            font_name: "fonts/Ant.ttf"
+
+        Button:
+            text: "-->"
+            size_hint: .15, .10
+            pos_hint: {'right': 1, 'top': 1}
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = 1
+                root.manager.current = 'Menu'
+
+<Incubator>:
+    name: "Incubator"
+
+    FloatLayout:
+        orientation: "vertical"
+
+        Image:
+            source: "images/Room2p2.png"
+            allow_stretch: True
+            keep_ratio: False
+            fit_mode: "contain"
+
+        Label:
+            text: "TIER: "
+            size_hint: .20, .10
+            pos_hint: {'left': 1, 'y': 0.17}
+
+        Label:
+            text: "STAGE: "
+            size_hint: .20, .10
+            pos_hint: {'left': 1, 'y': 0.14}
+
+        Label:
+            text: "TIER: "
+            size_hint: .20, .10
+            pos_hint: {'right': 1, 'y': 0.17}
+
+        Label:
+            text: "STAGE: "
+            size_hint: .20, .10
+            pos_hint: {'right': 1, 'y': 0.14}
+
+        Button:
+            text: "HATCH SPEED"
+            size_hint: .50, .15
+            pos_hint: {'left': 1, 'bottom': 1}
+            font_size: 45
+            font_name: "fonts/Ant.ttf"
+
+        Button:
+            text: "MULTI HATCH"
+            size_hint: .50, .15
+            pos_hint: {'right': 1, 'bottom': 1}
+            font_size: 45
+            font_name: "fonts/Ant.ttf"
+
+        Button:
+            text: "<--"
+            size_hint: .15, .10
+            pos_hint: {'left': 1, 'top': 1}
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.manager.transition.duration = 1
+                root.manager.current = 'Menu'
+
+<Storage>:
+    name: "Storage"
+
+    FloatLayout:
+        orientation: "vertical"
+
+        Image:
+            source: "images/FoodRoomp2.png"
+            allow_stretch: True
+            keep_ratio: False
+            fit_mode: "contain"
+
+        Button:
+            text: "UPGRADE CAPACITX"
+            size_hint: 1.0, .15
+            pos_hint: { 'bottom': 1}
+            font_size: 50
+            font_name: "fonts/Ant.ttf"
+
+        Button:
+            text: "-->"
+            size_hint: .15, .10
+            pos_hint: {'right': 1, 'top': 1}
+            on_release:
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = 1
+                root.manager.current = 'Menu'

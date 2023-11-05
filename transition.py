@@ -2,24 +2,13 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.storage.jsonstore import JsonStore
+from Incubator import Incubator
+from FoodStorage import FoodStorage
+from QueenUpgrades import QueenUpgrades
 
 
 class WindowManager(ScreenManager):
-    incubatorUpgradesFile = JsonStore('Incubator.json')
-    FoodUpgradesFile = JsonStore('FoodStorage.py')
-    QueenUpgradesFile = JsonStore('QueenUpgrades.py')
-    antCount = incubatorUpgradesFile.get('antCounter')['value']
-    food_count = incubatorUpgradesFile.get('currentFoodUnits')['value']
-    egg_count = incubatorUpgradesFile.get('eggCounter')['value']
-
-    def __init__(self):
-        print(self.antCount)
-
-    def updateCounters(self):
-        self.ids.ant_count = self.antCount
-        self.ids.food_count = self.food_count
-        self.ids.egg_count = self.egg_count
+    pass
 
 
 class MainWidget(Widget):
@@ -27,10 +16,29 @@ class MainWidget(Widget):
 
 
 class Home(Screen):
-    pass
+    incubator = Incubator()
+    foodStorage = FoodStorage()
+    queenUpgrades = QueenUpgrades()
+
+    antCount = incubator.getAnts()
+    food_count = foodStorage.getFood()
+    egg_count = queenUpgrades.getEggs()
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        print(self.antCount)
+
+    def updateCounters(self):
+        self.ids.ant_count.text = str(self.antCount)
+        self.ids.food_count.text = str(self.food_count)
+        self.ids.egg_count.text = str(self.egg_count)
 
 
 class Menu(Screen):
+    pass
+
+
+class Queen(Screen):
     pass
 
 
@@ -38,7 +46,13 @@ class Incubator(Screen):
     pass
 
 
+class Storage(Screen):
+    pass
+
+
 file = Builder.load_file('Screen.kv')
+
+
 class ScreenApp(App):
     def build(self):
         return file
