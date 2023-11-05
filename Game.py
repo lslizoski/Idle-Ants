@@ -1,5 +1,4 @@
 from kivy.core.audio import SoundLoader
-from Armory import Armory
 from FoodStorage import FoodStorage
 from GameInteractions.FoodGenerator import FoodGenerator
 from Incubator import Incubator
@@ -11,7 +10,6 @@ class Game:
     incubator = Incubator()
     foodStorage = FoodStorage()
     foodGenerator = FoodGenerator()
-    armory = Armory()
     sound = SoundLoader.load('Audio/FoodMunch.mp3')
     sound2 = SoundLoader.load('Audio/EggSqulech.mp3')
 
