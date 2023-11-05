@@ -56,7 +56,7 @@ class QueenUpgrades:
 
     def upgradeEggMultiplier(self):
         if (self.foodStorage.getFood() >= 100):
-            self.foodStorage.setFood(self.foodStorage.getFood() - 100)
+            self.foodStorage.addFood(self.foodStorage.getFood() - 100)
             self.eggMultiplier = self.eggMultiplierTier
             self.eggMultiplierTier, self.eggMultiplierTierStage, self.eggMultiplier = Promotions().multiplier(self.eggMultiplierTier, self.eggMultiplierTierStage, self.eggMultiplier)
             self.queenUpgradesFile.put('eggMultiplier', value=self.eggMultiplier, eggMultiplierTier=self.eggMultiplierTier, eggMultiplierTierStage=self.eggMultiplierTierStage)

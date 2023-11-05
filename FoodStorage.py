@@ -59,7 +59,7 @@ class FoodStorage:
             incubatorUpgradesFile.put('antCounter', value=self.antCounter)
             self.foodMultiplier = self.foodMultiplierTier
             self.foodMultiplierTier, self.foodMultiplierTierStage, self.foodMultiplier = Promotions().multiplier(self.foodMultiplierTier, self.foodMultiplierTierStage, self.foodMultiplier)
-            print(self.foodMultiplierTierStage)
+            incubatorUpgradesFile.put('antCounter', value=self.antCounter)
             self.storageUpgradesFile.put('foodMultiplier', value=self.foodMultiplier, foodMultiplierTier=self.foodMultiplierTier, foodMultiplierTierStage=self.foodMultiplierTierStage)
         else:
             print("Not enough food resources.")
