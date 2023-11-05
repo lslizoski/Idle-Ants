@@ -22,6 +22,9 @@ class Game:
     def layEgg(self):
         self.queenUpgrades.setEggs(self.queenUpgrades.getEggs() + self.queenUpgrades.eggMultiplier)
 
+    def hatchEgg(self):
+        self.incubator.setAnts(self.incubator.hatchMultiplier)
+
     def foodUpgradeButton(self):
         self.foodStorage.upgradeStorage()
 
