@@ -1,4 +1,8 @@
 import random
+from kivy.app import App
+from kivy.uix.image import Image
+from kivy.uix.boxlayout import BoxLayout
+
 
 class FoodGenerator:
 
@@ -9,10 +13,19 @@ class FoodGenerator:
     }
 
     def __init__(self):
-        self.chooseFood()
+        self.food = self.chooseFood()
 
     def chooseFood(self):
         food, value = random.choice(list(self.foodDict.items()))
-        return food
+        return value[1] # must return the filename of the selected food
 
-foodGenerator = FoodGenerator()
+class FoodDisplay(App):
+    def build(self):
+        layout = BoxLayout(orientation='vertical')
+        foodGenerator = FoodGenerator()
+        image = Image(source=foodGenerator.food)
+        layout.add_widget(image)
+        return layout
+
+FoodDisplay().run()
+
