@@ -75,7 +75,6 @@ WindowManager:
                 root.manager.transition.duration = 1
                 root.manager.current = 'Storage'
 
-
         # Button to go to Queen
         Button:
             text: "<--"
@@ -141,11 +140,12 @@ WindowManager:
             pos_hint: {'right': 1, 'y': 0.14}
 
         Button:
-            text: "LAX SPEED"
+            text: "LAY SPEED"
             size_hint: .50, .15
             pos_hint: {'left': 1,'bottom': 1}
             font_size: 50
             font_name: "fonts/Ant.ttf"
+            on_release: root.queenUpgrades.upgradeEggLaySpeed()
 
         Button:
             text: "MULTI EGG"
@@ -153,6 +153,7 @@ WindowManager:
             pos_hint: {'right': 1, 'bottom': 1}
             font_size: 50
             font_name: "fonts/Ant.ttf"
+            on_release: root.queenUpgrades.upgradeEggMultiplier()
 
 
         Button:
