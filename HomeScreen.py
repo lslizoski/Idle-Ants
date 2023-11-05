@@ -9,21 +9,28 @@ from Game import Game
 class BoxLayouts(BoxLayout):
     pass
 
-
 class FloatLayouts(FloatLayout):
-    pass
+    game = Game()
+    def __init__(self, **kwargs):
+        super(FloatLayouts, self).__init__(**kwargs)
+        super().__init__(**kwargs)
+        Clock.schedule_interval(self.layEgg, self.game.queenUpgrades.eggLaySpeed)
 
+    def layEgg(self, interval):
+        self.game.layEgg()
+
+    def start(self):
+        Clock.unschedule(self.layEgg)
+        Clock.schedule_interval(self.layEgg, self.game.queenUpgrades.eggLaySpeed)
+
+    def stop(self):
+        Clock.unschedule(self.layEgg)
 
 class MainWidget(Widget):
     pass
 
-
 class IdleAntsApp(App):
-    """
     def build(self):
-        game = Game()
-        Clock.schedule_interval(game.update, 1.0 / 60.0)
-        Clock.schedule_interval(game.layEgg(), game.queenUpgrades.getEggLaySpeed()) #Lays egg every so often
-        return MainWidget"""
+        return FloatLayouts()
 
 IdleAntsApp().run()
