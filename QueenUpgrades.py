@@ -76,3 +76,14 @@ class QueenUpgrades:
     def getEggs(self):
         return self.queenUpgradesFile.get('eggCounter')['value']
 
+    def getLaySpeedTier(self):
+        return self.queenUpgradesFile.get('eggLaySpeed')['eggLaySpeedTier']
+
+    def getLaySpeedTierStage(self):
+        return self.queenUpgradesFile.get('eggLaySpeed')['eggLaySpeedTierStage']
+
+    def getLayMultiTier(self):
+        return self.queenUpgradesFile.get('eggMultiplier')['eggMultiplierTier']
+
+    def getLayMultiTierStage(self):
+        return self.queenUpgradesFile.get('eggMultiplier')['eggMultiplierTierStage']

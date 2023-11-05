@@ -13,7 +13,7 @@ class Game:
     sound = SoundLoader.load('Audio/FoodMunch.mp3')
 
     def __init__(self):
-        self.queenMultiplierUpgradeButton()
+        pass
 
     def update(self):
         pass
@@ -57,4 +57,5 @@ class Game:
     def getArmory(self):
         return self.armory
 
-game = Game().queenMultiplierUpgradeButton()
+
+game = Game()

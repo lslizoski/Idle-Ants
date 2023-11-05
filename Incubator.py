@@ -57,12 +57,12 @@ class Incubator:
     def upgradeHatchSpeed(self):
         self.hatchSpeed -= self.hatchSpeed * self.increasePercent
         self.hatchSpeedTier, self.hatchSpeedTierStage, self.increasePercent = Promotions().percentage(self.hatchSpeedTier, self.hatchSpeedTierStage, self.increasePercent)
-        self.incubatorUpgradesFile.put('HatchSpeed', value=self.hatchSpeed, hatchSpeedTier=self.hatchSpeedTier, hatchSpeedTierStage=self.hatchSpeedTierStage)
+        self.incubatorUpgradesFile.put('hatchSpeed', value=self.hatchSpeed, hatchSpeedTier=self.hatchSpeedTier, hatchSpeedTierStage=self.hatchSpeedTierStage)
 
     def upgradeHatchMultiplier(self):
         self.hatchMultiplier = self.hatchMultiplierTier
         self.hatchMultiplierTier, self.hatchMultiplierTierStage, self.hatchMultiplier = Promotions().multiplier(self.hatchMultiplierTier, self.hatchMultiplierTierStage, self.hatchMultiplier)
-        self.incubatorUpgradesFile.put('HatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
+        self.incubatorUpgradesFile.put('hatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
 
     def hatchEgg(self):
         self.queenUpgrades.setEggs(self.queenUpgrades.getEggs() - 1)
@@ -74,3 +74,15 @@ class Incubator:
 
     def getAnts(self):
         return self.incubatorUpgradesFile.get('antCounter')['value']
+
+    def getHatchSpeedTier(self):
+        return self.incubatorUpgradesFile.get('hatchSpeed')['hatchSpeedTier']
+
+    def getHatchSpeedTierStage(self):
+        return self.incubatorUpgradesFile.get('hatchSpeed')['hatchSpeedTierStage']
+
+    def getHatchMultiTier(self):
+        return self.incubatorUpgradesFile.get('hatchMultiplier')['hatchMultiplierTier']
+
+    def getHatchMultiTierStage(self):
+        return self.incubatorUpgradesFile.get('hatchMultiplier')['hatchMultiplierTierStage']

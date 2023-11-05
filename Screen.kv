@@ -16,6 +16,7 @@ WindowManager:
             text: "You should not see this"
             size_hint: .45, 0.30
             pos_hint: {'center_x': 0.5, 'y': 0.15}
+            on_release: root.setAnt()
 
         Image:
             source: "images/anthill_surface.png"
@@ -120,21 +121,25 @@ WindowManager:
             fit_mode: "contain"
 
         Label:
+            id: speed_tier
             text: "TIER: "
             size_hint: .20, .10
             pos_hint: {'left': 1, 'y': 0.17}
 
         Label:
+            id: speed_stage
             text: "STAGE: "
             size_hint: .20, .10
             pos_hint: {'left': 1, 'y': 0.14}
 
         Label:
+            id: multi_tier
             text: "TIER: "
             size_hint: .20, .10
             pos_hint: {'right': 1, 'y': 0.17}
 
         Label:
+            id: multi_stage
             text: "STAGE: "
             size_hint: .20, .10
             pos_hint: {'right': 1, 'y': 0.14}
@@ -145,7 +150,10 @@ WindowManager:
             pos_hint: {'left': 1,'bottom': 1}
             font_size: 50
             font_name: "fonts/Ant.ttf"
-            on_release: root.queenUpgradeLayButton()
+            on_release:
+                root.queenEggSpeedUpgradeButton()
+                root.updateCounters()
+
 
         Button:
             text: "MULTI EGG"
@@ -153,7 +161,9 @@ WindowManager:
             pos_hint: {'right': 1, 'bottom': 1}
             font_size: 50
             font_name: "fonts/Ant.ttf"
-            on_release: root.queenUpgradeEggsButton()
+            on_release:
+                root.queenMultiplierUpgradeButton()
+                root.updateCounters()
 
 
         Button:
@@ -178,21 +188,25 @@ WindowManager:
             fit_mode: "contain"
 
         Label:
+            id: speed_tier
             text: "TIER: "
             size_hint: .20, .10
             pos_hint: {'left': 1, 'y': 0.17}
 
         Label:
+            id: speed_stage
             text: "STAGE: "
             size_hint: .20, .10
             pos_hint: {'left': 1, 'y': 0.14}
 
         Label:
+            id: multi_tier
             text: "TIER: "
             size_hint: .20, .10
             pos_hint: {'right': 1, 'y': 0.17}
 
         Label:
+            id: multi_stage
             text: "STAGE: "
             size_hint: .20, .10
             pos_hint: {'right': 1, 'y': 0.14}
@@ -203,7 +217,9 @@ WindowManager:
             pos_hint: {'left': 1, 'bottom': 1}
             font_size: 45
             font_name: "fonts/Ant.ttf"
-            on_release: root.incubatorHatchSpeedUpgradeButton()
+            on_release:
+                root.incubatorHatchSpeedUpgradeButton()
+                root.updateCounters()
 
         Button:
             text: "MULTI HATCH"
@@ -211,7 +227,9 @@ WindowManager:
             pos_hint: {'right': 1, 'bottom': 1}
             font_size: 45
             font_name: "fonts/Ant.ttf"
-            on_release: root.incubatorMultiplierUpgradeButton()
+            on_release:
+                root.incubatorMultiplierUpgradeButton()
+                root.updateCounters()
 
         Button:
             text: "<--"
@@ -235,12 +253,19 @@ WindowManager:
             fit_mode: "contain"
 
         Button:
-            text: "UPGRADE CAPACITX"
-            size_hint: 1.0, .15
-            pos_hint: { 'bottom': 1}
-            font_size: 50
+            text: "UPGRADE CAP"
+            size_hint: .5, .15
+            pos_hint: {'left': 1, 'bottom': 1}
+            font_size: 45
             font_name: "fonts/Ant.ttf"
             on_release: root.foodUpgradeButton()
+
+        Button:
+            text: "MULTI GATHER"
+            size_hint: .50, .15
+            pos_hint: {'right': 1, 'bottom': 1}
+            font_size: 45
+            font_name: "fonts/Ant.ttf"
 
         Button:
             text: "-->"
