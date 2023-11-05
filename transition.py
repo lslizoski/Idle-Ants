@@ -41,7 +41,12 @@ class Menu(Screen):
 
 class Queen(Screen):
     game = Game()
+    queenUpgrades = QueenUpgrades()
 
+    def queenUpgradeLayButton(self):
+        self.queenUpgrades.upgradeEggLaySpeed()
+    def queenUpgradeEggsButton(self):
+        self.queenUpgrades.upgradeEggMultiplier()
 
 class Incubator(Screen):
     incubator = Incubator()
