@@ -69,8 +69,8 @@ class Incubator:
         self.setAnts(self.getAnts() + self.hatchMultiplier)
 
     def setAnts(self, addAmount):
-        self.antCounter += addAmount
-        self.incubatorUpgradesFile.put('antCounter', value=self.antCounter)
+        addAmount += self.incubatorUpgradesFile.get('antCounter')['value']
+        self.incubatorUpgradesFile.put('antCounter', value=addAmount)
 
     def getAnts(self):
         return self.incubatorUpgradesFile.get('antCounter')['value']
