@@ -3,14 +3,16 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
 from kivy.uix.floatlayout import FloatLayout
 from kivy.clock import Clock
-
 from Game import Game
+
 
 class BoxLayouts(BoxLayout):
     pass
 
+
 class FloatLayouts(FloatLayout):
     game = Game()
+
     def __init__(self, **kwargs):
         super(FloatLayouts, self).__init__(**kwargs)
         super().__init__(**kwargs)

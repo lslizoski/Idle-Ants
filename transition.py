@@ -5,6 +5,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from Incubator import Incubator
 from FoodStorage import FoodStorage
 from QueenUpgrades import QueenUpgrades
+from Game import Game
 
 
 class WindowManager(ScreenManager):
@@ -39,15 +40,22 @@ class Menu(Screen):
 
 
 class Queen(Screen):
-    pass
+    game = Game()
 
 
 class Incubator(Screen):
-    pass
+    incubator = Incubator()
+    def incubatorMultiplierUpgradeButton(self):
+        self.incubator.upgradeHatchMultiplier()
+
+
+    def incubatorHatchSpeedUpgradeButton(self):
+        self.incubator.upgradeHatchSpeed()
 
 
 class Storage(Screen):
-    pass
+    def foodUpgradeButton(self):
+        self.foodStorage.upgradeStorage()
 
 
 file = Builder.load_file('Screen.kv')

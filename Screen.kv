@@ -154,6 +154,7 @@ WindowManager:
             font_size: 50
             font_name: "fonts/Ant.ttf"
 
+
         Button:
             text: "-->"
             size_hint: .15, .10
@@ -201,6 +202,7 @@ WindowManager:
             pos_hint: {'left': 1, 'bottom': 1}
             font_size: 45
             font_name: "fonts/Ant.ttf"
+            on_release: root.incubatorHatchSpeedUpgradeButton()
 
         Button:
             text: "MULTI HATCH"
@@ -208,6 +210,7 @@ WindowManager:
             pos_hint: {'right': 1, 'bottom': 1}
             font_size: 45
             font_name: "fonts/Ant.ttf"
+            on_release: root.incubatorMultiplierUpgradeButton()
 
         Button:
             text: "<--"
@@ -236,6 +239,7 @@ WindowManager:
             pos_hint: { 'bottom': 1}
             font_size: 50
             font_name: "fonts/Ant.ttf"
+            on_release: root.foodUpgradeButton()
 
         Button:
             text: "-->"
