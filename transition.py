@@ -40,7 +40,7 @@ class Home(Screen):
 
     def timers(self, interval):
         self.updateCounters()
-        if (self.clock % round(self.incubator.getHatchSpeed()) == 0):
+        if self.clock % round(self.incubator.getHatchSpeed()) == 0:
             self.hatchEgg()
             print("Hatch")
         if (self.clock % round(self.queenUpgrades.getEggLaySpeed())) == 0:
@@ -72,11 +72,24 @@ class Home(Screen):
 
 
 class Menu(Screen):
-    pass
+    incubator = Incubator()
+    foodStorage = FoodStorage()
+    queenUpgrades = QueenUpgrades()
+
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        Clock.schedule_interval(self.updateCounters, 1)
+
+    def updateCounters(self, *args):
+        self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
+        self.ids.food_count.text = str('Food: ' + str(self.foodStorage.getFood()) + '/' + str(self.foodStorage.getMaxFood()))
+        self.ids.egg_count.text = str('Eggs: ' + str(self.queenUpgrades.getEggs()))
 
 
 class Queen(Screen):
     queenUpgrades = QueenUpgrades()
+    incubator = Incubator()
+    foodStorage = FoodStorage()
     sound = SoundLoader.load('Audio/FoodMunch.mp3')
 
     def __init__(self, **kw):
@@ -92,14 +105,42 @@ class Queen(Screen):
         self.sound.play()
 
     def updateCounters(self, *args):
+        self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
+        self.ids.food_count.text = str('Food: ' + str(self.foodStorage.getFood()) + '/' + str(self.foodStorage.getMaxFood()))
+        self.ids.egg_count.text = str('Eggs: ' + str(self.queenUpgrades.getEggs()))
         self.ids.speed_tier.text = str('TIER:' + str(self.queenUpgrades.getLaySpeedTier()))
         self.ids.speed_stage.text = str('STAGE:' + str(self.queenUpgrades.getLaySpeedTierStage()))
         self.ids.multi_tier.text = str('TIER:' + str(self.queenUpgrades.getLayMultiTier()))
         self.ids.multi_stage.text = str('STAGE:' + str(self.queenUpgrades.getLayMultiTierStage()))
 
 
+class Storage(Screen):
+    foodStorage = FoodStorage()
+    incubator = Incubator()
+    queenUpgrades = QueenUpgrades()
+
+    def __init__(self, **kw):
+        super().__init__(**kw)
+        Clock.schedule_interval(self.updateCounters, 1)
+
+    def foodUpgradeButton(self):
+        self.foodStorage.upgradeStorage()
+
+    def foodMultiplyButton(self):
+        self.foodStorage.upgradeFoodMultiplier()
+
+    def updateCounters(self, *args):
+        self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
+        self.ids.food_count.text = str('Food: ' + str(self.foodStorage.getFood()) + '/' + str(self.foodStorage.getMaxFood()))
+        self.ids.egg_count.text = str('Eggs: ' + str(self.queenUpgrades.getEggs()))
+        self.ids.multi_tier.text = str('TIER:' + str(self.foodStorage.getMultiplyTier()))
+        self.ids.multi_stage.text = str('STAGE:' + str(self.foodStorage.getMultiplyTierStage()))
+
+
 class Incubator(Screen):
     incubator = Incubator()
+    queenUpgrades = QueenUpgrades()
+    foodStorage = FoodStorage()
     sound = SoundLoader.load('Audio/EggSqulech.mp3')
 
     def __init__(self, **kw):
@@ -115,28 +156,13 @@ class Incubator(Screen):
         self.incubator.upgradeHatchSpeed()
 
     def updateCounters(self, *args):
+        self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
+        self.ids.food_count.text = str('Food: ' + str(self.foodStorage.getFood()) + '/' + str(self.foodStorage.getMaxFood()))
+        self.ids.egg_count.text = str('Eggs: ' + str(self.queenUpgrades.getEggs()))
         self.ids.speed_tier.text = str('TIER:' + str(self.incubator.getHatchSpeedTier()))
         self.ids.speed_stage.text = str('STAGE:' + str(self.incubator.getHatchSpeedTierStage()))
         self.ids.multi_tier.text = str('TIER:' + str(self.incubator.getHatchMultiTier()))
         self.ids.multi_stage.text = str('STAGE:' + str(self.incubator.getHatchMultiTierStage()))
-
-
-class Storage(Screen):
-    foodStorage = FoodStorage()
-
-    def __init__(self, **kw):
-        super().__init__(**kw)
-        Clock.schedule_interval(self.updateCounters, 1)
-
-    def foodUpgradeButton(self):
-        self.foodStorage.upgradeStorage()
-
-    def foodMultiplyButton(self):
-        self.foodStorage.upgradeFoodMultiplier()
-
-    def updateCounters(self, *args):
-        self.ids.multi_tier.text = str('TIER:' + str(self.foodStorage.getMultiplyTier()))
-        self.ids.multi_stage.text = str('STAGE:' + str(self.foodStorage.getMultiplyTierStage()))
 
 
 file = Builder.load_file('Screen.kv')

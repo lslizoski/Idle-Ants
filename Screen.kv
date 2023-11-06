@@ -48,7 +48,7 @@ WindowManager:
         Button:
             text: "v\nv"
             size_hint: .25, .05
-            pos_hint: {'center_x': 0.5}
+            pos_hint: {'center_x': 0.5, 'bottom': 0}
             on_release:
                 root.updateCounters()
 				root.manager.transition.direction = 'up'
@@ -68,6 +68,24 @@ WindowManager:
             allow_stretch: True
             keep_ratio: False
             fit_mode: "contain"
+
+        Label:
+            id: ant_count
+            text: '1'
+            size_hint: .34, 1
+            pos_hint: {'x':0, 'top': 1.4}
+
+        Label:
+            id: food_count
+            text: "2"
+            size_hint: .34, 1
+            pos_hint: {'x':.33, 'top': 1.4}
+
+        Label:
+            id: egg_count
+            text: "3"
+            size_hint: .33, 1
+            pos_hint: {'right':1, 'top': 1.4}
 
 
         # Button to go to food room
@@ -109,7 +127,7 @@ WindowManager:
         Button:
             text: "^\n^"
             size_hint: .25, .05
-            pos_hint: {'center_x': 0.5, 'center_y': 0.95}
+            pos_hint: {'center_x': 0.5, 'top': 1}
             on_release:
                 root.manager.transition.direction = 'down'
                 root.manager.transition.duration = 1
@@ -127,6 +145,24 @@ WindowManager:
             allow_stretch: True
             keep_ratio: False
             fit_mode: "contain"
+
+        Label:
+            id: ant_count
+            text: '1'
+            size_hint: .34, 1
+            pos_hint: {'x':0, 'top': 1.38}
+
+        Label:
+            id: food_count
+            text: "2"
+            size_hint: .34, 1
+            pos_hint: {'x':.33, 'top': 1.38}
+
+        Label:
+            id: egg_count
+            text: "3"
+            size_hint: .33, 1
+            pos_hint: {'right':1, 'top': 1.38}
 
         Label:
             id: speed_tier
@@ -199,6 +235,24 @@ WindowManager:
             fit_mode: "contain"
 
         Label:
+            id: ant_count
+            text: '1'
+            size_hint: .34, 1
+            pos_hint: {'x':0, 'top': 1.38}
+
+        Label:
+            id: food_count
+            text: "2"
+            size_hint: .34, 1
+            pos_hint: {'x':.33, 'top': 1.38}
+
+        Label:
+            id: egg_count
+            text: "3"
+            size_hint: .33, 1
+            pos_hint: {'right':1, 'top': 1.38}
+
+        Label:
             id: speed_tier
             text: "TIER: "
             size_hint: .20, .10
@@ -265,6 +319,24 @@ WindowManager:
             allow_stretch: True
             keep_ratio: False
             fit_mode: "contain"
+
+        Label:
+            id: ant_count
+            text: '1'
+            size_hint: .34, 1
+            pos_hint: {'x':0, 'top': 1.38}
+
+        Label:
+            id: food_count
+            text: "2"
+            size_hint: .34, 1
+            pos_hint: {'x':.33, 'top': 1.38}
+
+        Label:
+            id: egg_count
+            text: "3"
+            size_hint: .33, 1
+            pos_hint: {'right':1, 'top': 1.38}
 
         Label:
             id: multi_tier
