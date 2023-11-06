@@ -5,10 +5,11 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from Incubator import Incubator
 from FoodStorage import FoodStorage
 from QueenUpgrades import QueenUpgrades
-from Game import Game
+from GameInteractions.FoodGenerator import FoodGenerator
 from kivy.animation import Animation
 from kivy.uix.image import Image
 from kivy.clock import Clock
+from kivy.core.audio import SoundLoader
 
 
 class WindowManager(ScreenManager):
@@ -23,7 +24,7 @@ class Home(Screen):
     incubator = Incubator()
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades()
-    game = Game()
+    foodGenerator = FoodGenerator()
     clock = 1
 
     def __init__(self, **kwargs):
@@ -39,11 +40,11 @@ class Home(Screen):
 
     def timers(self, interval):
         self.updateCounters()
-        if (self.clock % round(self.game.incubator.getHatchSpeed()) == 0):
-            self.game.hatchEgg()
+        if (self.clock % round(self.incubator.getHatchSpeed()) == 0):
+            self.hatchEgg()
             print("Hatch")
-        if (self.clock % round(self.game.queenUpgrades.getEggLaySpeed())) == 0:
-            self.game.layEgg()
+        if (self.clock % round(self.queenUpgrades.getEggLaySpeed())) == 0:
+            self.layEgg()
             print("Lay")
         self.clock += 1
 
@@ -62,14 +63,21 @@ class Home(Screen):
     def setAnt(self):
         self.incubator.setAnts(1)
 
+    def layEgg(self):
+        self.queenUpgrades.setEggs(self.queenUpgrades.eggMultiplier)
+
+    def hatchEgg(self):
+        self.incubator.setAnts(self.incubator.hatchMultiplier)
+        self.foodStorage.addFood(self.foodGenerator.chooseFood() * self.foodStorage.getFoodMultiplier())
+
 
 class Menu(Screen):
     pass
 
 
 class Queen(Screen):
-    game = Game()
     queenUpgrades = QueenUpgrades()
+    sound = SoundLoader.load('Audio/FoodMunch.mp3')
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -80,9 +88,8 @@ class Queen(Screen):
 
     def queenMultiplierUpgradeButton(self):
         self.queenUpgrades.upgradeEggMultiplier()
-        if self.game.sound:
-            self.game.sound.volume = 1
-            self.game.sound.play()
+        self.sound.volume = 1
+        self.sound.play()
 
     def updateCounters(self, *args):
         self.ids.speed_tier.text = str('TIER:' + str(self.queenUpgrades.getLaySpeedTier()))
@@ -90,9 +97,10 @@ class Queen(Screen):
         self.ids.multi_tier.text = str('TIER:' + str(self.queenUpgrades.getLayMultiTier()))
         self.ids.multi_stage.text = str('STAGE:' + str(self.queenUpgrades.getLayMultiTierStage()))
 
+
 class Incubator(Screen):
-    game = Game()
     incubator = Incubator()
+    sound = SoundLoader.load('Audio/EggSqulech.mp3')
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -100,9 +108,8 @@ class Incubator(Screen):
 
     def incubatorMultiplierUpgradeButton(self):
         self.incubator.upgradeHatchMultiplier()
-        if self.game.sound2:
-            self.game.sound2.volume = 1
-            self.game.sound2.play()
+        self.sound.volume = 1
+        self.sound.play()
 
     def incubatorHatchSpeedUpgradeButton(self):
         self.incubator.upgradeHatchSpeed()

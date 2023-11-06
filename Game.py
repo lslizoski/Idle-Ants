@@ -63,4 +63,3 @@ class Game:
         return self.armory
 
 
-game = Game()
