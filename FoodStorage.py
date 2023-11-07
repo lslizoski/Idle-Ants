@@ -4,7 +4,7 @@ import os
 
 class FoodStorage:
 
-    # Open json file for incubator room
+    # Open json file for incubator room and food storage
     storageUpgradesFile = JsonStore('FoodStorage.json')
 
     currentFoodUnits = 0
@@ -24,12 +24,11 @@ class FoodStorage:
             self.storageUpgradesFile.put('foodMultiplier', value=self.foodMultiplier, foodMultiplierTier=self.foodMultiplierTier, foodMultiplierTierStage=self.foodMultiplierTierStage)
 
     def loadSaveData(self):
-        # Hatch multiplier variables
         self.currentFoodUnits = self.storageUpgradesFile.get('currentFoodUnits')['value']
         self.maxFoodCapacity = self.storageUpgradesFile.get('maxFoodCapacity')['value']
         self.foodMultiplier = self.storageUpgradesFile.get('foodMultiplier')['value']
         self.foodMultiplierTier = self.storageUpgradesFile.get('foodMultiplier')['foodMultiplierTier']
-        self.foodMultiplier = self.storageUpgradesFile.get('foodMultiplier')['foodMultiplierTierStage']
+        self.foodMultiplierTierStage = self.storageUpgradesFile.get('foodMultiplier')['foodMultiplierTierStage']
 
     def addFood(self, foodToAdd):
         self.currentFoodUnits = self.storageUpgradesFile.get('currentFoodUnits')['value']
@@ -40,27 +39,20 @@ class FoodStorage:
             self.currentFoodUnits += foodToAdd * self.foodMultiplier
         self.storageUpgradesFile.put('currentFoodUnits', value=self.currentFoodUnits)
 
-    def upgradeStorage(self):
-        incubatorUpgradesFile = JsonStore('Incubator.json')
-        self.antCounter = incubatorUpgradesFile.get('antCounter')['value']
-        if (self.antCounter >= 50):
+    def upgradeStorage(self, ants):
+        if (ants >= 50):
+            self.maxFoodCapacity = self.storageUpgradesFile.get('maxFoodCapacity')['value']
             self.maxFoodCapacity += 50
-            self.antCounter -= 50
             self.storageUpgradesFile.put('maxFoodCapacity', value=self.maxFoodCapacity)
-            incubatorUpgradesFile.put('antCounter', value=self.antCounter)
+            return
         else:
             print("Not enough ant resources.")
 
-    def upgradeFoodMultiplier(self):
-        incubatorUpgradesFile = JsonStore('Incubator.json')
-        self.antCounter = incubatorUpgradesFile.get('antCounter')['value']
-        if (self.antCounter >= 50):
-            self.antCounter -= 50
-            incubatorUpgradesFile.put('antCounter', value=self.antCounter)
-            self.foodMultiplier = self.foodMultiplierTier
+    def upgradeFoodMultiplier(self, ants):
+        if (ants >= 50):
             self.foodMultiplierTier, self.foodMultiplierTierStage, self.foodMultiplier = Promotions().multiplier(self.foodMultiplierTier, self.foodMultiplierTierStage, self.foodMultiplier)
-            incubatorUpgradesFile.put('antCounter', value=self.antCounter)
             self.storageUpgradesFile.put('foodMultiplier', value=self.foodMultiplier, foodMultiplierTier=self.foodMultiplierTier, foodMultiplierTierStage=self.foodMultiplierTierStage)
+            return
         else:
             print("Not enough food resources.")
 

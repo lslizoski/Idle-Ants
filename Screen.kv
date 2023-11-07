@@ -18,7 +18,6 @@ WindowManager:
             pos_hint: {'center_x': 0.5, 'y': 0.15}
             on_release:
                 root.setAnt()
-                root.updateCounters()
 
         Image:
             source: "images/anthill_surface.png"
@@ -50,7 +49,6 @@ WindowManager:
             size_hint: .25, .05
             pos_hint: {'center_x': 0.5, 'bottom': 0}
             on_release:
-                root.updateCounters()
 				root.manager.transition.direction = 'up'
 				root.manager.transition.duration = 1
 				root.manager.current = 'Menu'
@@ -196,7 +194,6 @@ WindowManager:
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.queenEggSpeedUpgradeButton()
-                root.updateCounters()
             background_color: 1, 0, 1, 1
 
 
@@ -208,7 +205,6 @@ WindowManager:
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.queenMultiplierUpgradeButton()
-                root.updateCounters()
             background_color: 1, 0, 1, 1
 
 
@@ -284,7 +280,6 @@ WindowManager:
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.incubatorHatchSpeedUpgradeButton()
-                root.updateCounters()
             background_color: 1, 0, 1, 1
 
         Button:
@@ -295,7 +290,6 @@ WindowManager:
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.incubatorMultiplierUpgradeButton()
-                root.updateCounters()
             background_color: 1, 0, 1, 1
 
         Button:
@@ -367,7 +361,6 @@ WindowManager:
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.foodMultiplyButton()
-                root.updateCounters()
             background_color: 1, 0, 1, 1
 
         Button:

@@ -63,10 +63,6 @@ class QueenUpgrades:
         else:
             print("Not enough food resources.")
 
-    def addEggs(self, amount):
-        self.eggCounter += amount
-        self.queenUpgradesFile.put('eggCounter', value=self.eggCounter)
-
     def getEggLaySpeed(self):
         return self.queenUpgradesFile.get('eggLaySpeed')['value']
 

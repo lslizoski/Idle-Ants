@@ -42,10 +42,10 @@ class Home(Screen):
         self.updateCounters()
         if self.clock % round(self.incubator.getHatchSpeed()) == 0:
             self.hatchEgg()
-            print("Hatch")
+            #print("Hatch")
         if (self.clock % round(self.queenUpgrades.getEggLaySpeed())) == 0:
             self.layEgg()
-            print("Lay")
+            #print("Lay")
         self.clock += 1
 
     def start(self):
@@ -61,13 +61,17 @@ class Home(Screen):
         self.ids.egg_count.text = str('Eggs: ' + str(self.queenUpgrades.getEggs()))
 
     def setAnt(self):
-        self.incubator.setAnts(1)
+        self.incubator.setAnts(self.incubator.getHatchMultiTier())
 
     def layEgg(self):
-        self.queenUpgrades.setEggs(self.queenUpgrades.eggMultiplier)
+        self.queenUpgrades.setEggs(self.queenUpgrades.getLayMultiTier())
 
     def hatchEgg(self):
-        self.incubator.setAnts(self.incubator.hatchMultiplier)
+        if self.queenUpgrades.getEggs() == 0:
+            pass
+        else:
+            self.incubator.setAnts(self.incubator.getHatchMultiTier())
+            self.queenUpgrades.setEggs(0 - (self.queenUpgrades.getLayMultiTier()))
         self.foodStorage.addFood(self.foodGenerator.chooseFood() * self.foodStorage.getFoodMultiplier())
 
 
@@ -78,7 +82,7 @@ class Menu(Screen):
 
     def __init__(self, **kw):
         super().__init__(**kw)
-        Clock.schedule_interval(self.updateCounters, 1)
+        Clock.schedule_interval(self.updateCounters, 0.1)
 
     def updateCounters(self, *args):
         self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
@@ -94,7 +98,7 @@ class Queen(Screen):
 
     def __init__(self, **kw):
         super().__init__(**kw)
-        Clock.schedule_interval(self.updateCounters, 1)
+        Clock.schedule_interval(self.updateCounters, 0.1)
 
     def queenEggSpeedUpgradeButton(self):
         self.queenUpgrades.upgradeEggLaySpeed()
@@ -118,16 +122,17 @@ class Storage(Screen):
     foodStorage = FoodStorage()
     incubator = Incubator()
     queenUpgrades = QueenUpgrades()
-
     def __init__(self, **kw):
         super().__init__(**kw)
         Clock.schedule_interval(self.updateCounters, 1)
 
     def foodUpgradeButton(self):
-        self.foodStorage.upgradeStorage()
+        self.foodStorage.upgradeStorage(self.incubator.getAnts())
+        self.incubator.setAnts(-50)
 
     def foodMultiplyButton(self):
-        self.foodStorage.upgradeFoodMultiplier()
+        self.foodStorage.upgradeFoodMultiplier(self.incubator.getAnts())
+        self.incubator.setAnts(-50)
 
     def updateCounters(self, *args):
         self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
@@ -145,7 +150,7 @@ class Incubator(Screen):
 
     def __init__(self, **kw):
         super().__init__(**kw)
-        Clock.schedule_interval(self.updateCounters, 1)
+        Clock.schedule_interval(self.updateCounters, 0.1)
 
     def incubatorMultiplierUpgradeButton(self):
         self.incubator.upgradeHatchMultiplier()
