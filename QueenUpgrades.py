@@ -1,7 +1,6 @@
 from kivy.storage.jsonstore import JsonStore
 import os.path
 from Promotions import Promotions
-from FoodStorage import FoodStorage
 
 class QueenUpgrades:
 
@@ -17,11 +16,10 @@ class QueenUpgrades:
 
     eggCounter = 0
 
-    foodStorage = FoodStorage()
-
-    def __init__(self):
+    def __init__(self, foodStorage):
         self.createFile()
         self.loadSavedData()
+        self.foodStorage = foodStorage
 
     def createFile(self):
         path = 'QueenUpgrades.json'
@@ -84,6 +82,3 @@ class QueenUpgrades:
 
     def getLayMultiTierStage(self):
         return self.queenUpgradesFile.get('eggMultiplier')['eggMultiplierTierStage']
-
-queen = QueenUpgrades()
-queen.upgradeEggLaySpeed()

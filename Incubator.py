@@ -2,9 +2,6 @@ from kivy.storage.jsonstore import JsonStore
 from Promotions import Promotions
 import os
 
-from QueenUpgrades import QueenUpgrades
-
-
 class Incubator:
 
     # Open json file for incubator room
@@ -23,10 +20,10 @@ class Incubator:
     increasePercent = 0.025
 
     antCounter = 0
-    queenUpgrades = QueenUpgrades()
 
-    def __init__(self):
+    def __init__(self, queenUpgrades):
         self.createFile()
+        self.queenUpgrades = queenUpgrades
 
     def getHatchSpeed(self):
         return self.hatchSpeed

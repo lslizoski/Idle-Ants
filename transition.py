@@ -21,9 +21,9 @@ class MainWidget(Widget):
 
 
 class Home(Screen):
-    incubator = Incubator()
     foodStorage = FoodStorage()
-    queenUpgrades = QueenUpgrades()
+    queenUpgrades = QueenUpgrades(foodStorage)
+    incubator = Incubator(queenUpgrades)
     foodGenerator = FoodGenerator()
     clock = 1
 
@@ -36,7 +36,7 @@ class Home(Screen):
         self.add_widget(ant)
         anim = Animation(x=250, y=-410, duration=5) + Animation(x=500, duration=5) + Animation(y=-500, duration=0.1) + Animation(x=-500, y=-500, duration=0.1)
         anim.start(ant)
-        Clock.schedule_interval(self.timers, 1)
+        Clock.schedule_interval(self.timers, 0.1)
 
     def timers(self, interval):
         self.updateCounters()
@@ -46,11 +46,11 @@ class Home(Screen):
         if (self.clock % round(self.queenUpgrades.getEggLaySpeed())) == 0:
             self.layEgg()
             #print("Lay")
-        self.clock += 1
+        self.clock += 0.1
 
     def start(self):
         Clock.unschedule(self.timers)
-        Clock.schedule_interval(self.timers, 1)
+        Clock.schedule_interval(self.timers, 0.1)
 
     def stop(self):
         Clock.unschedule(self.timers)
@@ -76,9 +76,9 @@ class Home(Screen):
 
 
 class Menu(Screen):
-    incubator = Incubator()
     foodStorage = FoodStorage()
-    queenUpgrades = QueenUpgrades()
+    queenUpgrades = QueenUpgrades(foodStorage)
+    incubator = Incubator(queenUpgrades)
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -91,9 +91,9 @@ class Menu(Screen):
 
 
 class Queen(Screen):
-    queenUpgrades = QueenUpgrades()
-    incubator = Incubator()
     foodStorage = FoodStorage()
+    queenUpgrades = QueenUpgrades(foodStorage)
+    incubator = Incubator(queenUpgrades)
     sound = SoundLoader.load('Audio/FoodMunch.mp3')
 
     def __init__(self, **kw):
@@ -120,8 +120,8 @@ class Queen(Screen):
 
 class Storage(Screen):
     foodStorage = FoodStorage()
-    incubator = Incubator()
-    queenUpgrades = QueenUpgrades()
+    queenUpgrades = QueenUpgrades(foodStorage)
+    incubator = Incubator(queenUpgrades)
     def __init__(self, **kw):
         super().__init__(**kw)
         Clock.schedule_interval(self.updateCounters, 1)
@@ -143,9 +143,9 @@ class Storage(Screen):
 
 
 class Incubator(Screen):
-    incubator = Incubator()
-    queenUpgrades = QueenUpgrades()
     foodStorage = FoodStorage()
+    queenUpgrades = QueenUpgrades(foodStorage)
+    incubator = Incubator(queenUpgrades)
     sound = SoundLoader.load('Audio/EggSqulech.mp3')
 
     def __init__(self, **kw):
@@ -176,7 +176,6 @@ file = Builder.load_file('Screen.kv')
 class ScreenApp(App):
     def build(self):
         return file
-
 
 # run the app
 ScreenApp().run()
