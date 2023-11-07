@@ -124,7 +124,7 @@ class Storage(Screen):
     incubator = Incubator(queenUpgrades)
     def __init__(self, **kw):
         super().__init__(**kw)
-        Clock.schedule_interval(self.updateCounters, 1)
+        Clock.schedule_interval(self.updateCounters, 0.1)
 
     def foodUpgradeButton(self):
         self.foodStorage.upgradeStorage(self.incubator.getAnts())
