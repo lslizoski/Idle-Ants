@@ -29,8 +29,7 @@ class Home(Screen):
         self.add_widget(ant)
         anim = Animation(x=250, y=-410, duration=5) + Animation(x=500, duration=5) + Animation(y=-500, duration=0.1) + Animation(x=-500, y=-500, duration=0.1)
         anim.start(ant)
-        Clock.schedule_interval(self.timers, 2)
-        print('ii')
+        Clock.schedule_interval(self.timers, 0.1)
 
     def timers(self, interval):
         self.updateCounters()
@@ -50,7 +49,6 @@ class Home(Screen):
         Clock.unschedule(self.timers)
 
     def updateCounters(self):
-        print('r')
         self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
         self.ids.food_count.text = str('Food: ' + str(self.foodStorage.getFood()) + '/' + str(self.foodStorage.getMaxFood()))
         self.ids.egg_count.text = str('Eggs: ' + str(self.queenUpgrades.getEggs()))
