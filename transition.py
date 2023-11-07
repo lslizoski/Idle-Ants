@@ -1,6 +1,4 @@
 from kivy.app import App
-from kivy.lang import Builder
-from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
 from Incubator import Incubator
 from FoodStorage import FoodStorage
@@ -15,11 +13,6 @@ from kivy.core.audio import SoundLoader
 class WindowManager(ScreenManager):
     pass
 
-
-class MainWidget(Widget):
-    pass
-
-
 class Home(Screen):
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades(foodStorage)
@@ -28,7 +21,7 @@ class Home(Screen):
     clock = 1
 
     def __init__(self, **kwargs):
-        super(Home, self).__init__(**kwargs)
+        super().__init__(**kwargs)
         ant = Image(source="images/ant.png")
 
         # Add the image to the layout
@@ -36,7 +29,8 @@ class Home(Screen):
         self.add_widget(ant)
         anim = Animation(x=250, y=-410, duration=5) + Animation(x=500, duration=5) + Animation(y=-500, duration=0.1) + Animation(x=-500, y=-500, duration=0.1)
         anim.start(ant)
-        Clock.schedule_interval(self.timers, 0.1)
+        Clock.schedule_interval(self.timers, 2)
+        print('ii')
 
     def timers(self, interval):
         self.updateCounters()
@@ -56,6 +50,7 @@ class Home(Screen):
         Clock.unschedule(self.timers)
 
     def updateCounters(self):
+        print('r')
         self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
         self.ids.food_count.text = str('Food: ' + str(self.foodStorage.getFood()) + '/' + str(self.foodStorage.getMaxFood()))
         self.ids.egg_count.text = str('Eggs: ' + str(self.queenUpgrades.getEggs()))
@@ -170,12 +165,10 @@ class Incubator(Screen):
         self.ids.multi_stage.text = str('STAGE:' + str(self.incubator.getHatchMultiTierStage()))
 
 
-file = Builder.load_file('Screen.kv')
-
-
 class ScreenApp(App):
     def build(self):
-        return file
+        return
+
 
 # run the app
 ScreenApp().run()
