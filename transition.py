@@ -18,10 +18,11 @@ class Home(Screen):
     queenUpgrades = QueenUpgrades(foodStorage)
     incubator = Incubator(queenUpgrades)
     foodGenerator = FoodGenerator()
-    clock = 1
+    hatchClock = 1
+    layClock = 1
 
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+        super(Home, self).__init__(**kwargs)
         ant = Image(source="images/ant.png")
 
         # Add the image to the layout
@@ -33,13 +34,17 @@ class Home(Screen):
 
     def timers(self, interval):
         self.updateCounters()
-        if self.clock % round(self.incubator.getHatchSpeed()) == 0:
+        if self.hatchClock - self.incubator.getHatchSpeed() >= 0:
             self.hatchEgg()
-            #print("Hatch")
-        if (self.clock % round(self.queenUpgrades.getEggLaySpeed())) == 0:
+            self.hatchClock = 1
+            print("Hatch", self.incubator.getHatchSpeed())
+        if self.layClock - self.queenUpgrades.getEggLaySpeed() >= 0:
             self.layEgg()
-            #print("Lay")
-        self.clock += 0.1
+            self.layClock = 1
+            print("lay", self.queenUpgrades.getEggLaySpeed())
+
+        self.hatchClock += 0.1
+        self.layClock += 0.1
 
     def start(self):
         Clock.unschedule(self.timers)
@@ -120,12 +125,12 @@ class Storage(Screen):
         Clock.schedule_interval(self.updateCounters, 0.1)
 
     def foodUpgradeButton(self):
-        self.foodStorage.upgradeStorage(self.incubator.getAnts())
-        self.incubator.setAnts(-50)
+        if self.foodStorage.upgradeStorage(self.incubator.getAnts()):
+            self.incubator.setAnts(-50)
 
     def foodMultiplyButton(self):
-        self.foodStorage.upgradeFoodMultiplier(self.incubator.getAnts())
-        self.incubator.setAnts(-50)
+        if self.foodStorage.upgradeFoodMultiplier(self.incubator.getAnts()):
+            self.incubator.setAnts(-50)
 
     def updateCounters(self, *args):
         self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))

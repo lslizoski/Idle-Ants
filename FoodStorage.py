@@ -44,7 +44,7 @@ class FoodStorage:
             self.maxFoodCapacity = self.storageUpgradesFile.get('maxFoodCapacity')['value']
             self.maxFoodCapacity += 50
             self.storageUpgradesFile.put('maxFoodCapacity', value=self.maxFoodCapacity)
-            return
+            return True
         else:
             print("Not enough ant resources.")
 
@@ -52,7 +52,7 @@ class FoodStorage:
         if (ants >= 50):
             self.foodMultiplierTier, self.foodMultiplierTierStage, self.foodMultiplier = Promotions().multiplier(self.foodMultiplierTier, self.foodMultiplierTierStage, self.foodMultiplier)
             self.storageUpgradesFile.put('foodMultiplier', value=self.foodMultiplier, foodMultiplierTier=self.foodMultiplierTier, foodMultiplierTierStage=self.foodMultiplierTierStage)
-            return
+            return True
         else:
             print("Not enough food resources.")
 

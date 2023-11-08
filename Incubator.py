@@ -72,6 +72,9 @@ class Incubator:
     def getAnts(self):
         return self.incubatorUpgradesFile.get('antCounter')['value']
 
+    def getHatchSpeed(self):
+        return self.incubatorUpgradesFile.get('hatchSpeed')['value']
+
     def getHatchSpeedTier(self):
         return self.incubatorUpgradesFile.get('hatchSpeed')['hatchSpeedTier']
 
