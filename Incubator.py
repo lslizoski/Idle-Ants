@@ -1,6 +1,7 @@
 from kivy.storage.jsonstore import JsonStore
 from Promotions import Promotions
 import os
+from kivy.core.audio import SoundLoader
 
 class Incubator:
 
@@ -20,6 +21,7 @@ class Incubator:
     increasePercent = 0.025
 
     antCounter = 0
+    sound = SoundLoader.load('Audio/EggSqulech.mp3')
 
     def __init__(self, queenUpgrades, foodStorage):
         self.createFile()
@@ -70,6 +72,8 @@ class Incubator:
             self.foodStorage.addFood(-100)
             self.hatchMultiplierTier, self.hatchMultiplierTierStage, self.hatchMultiplier = Promotions().multiplier(self.hatchMultiplierTier, self.hatchMultiplierTierStage, self.hatchMultiplier)
             self.incubatorUpgradesFile.put('hatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
+            self.sound.volume = 1
+            self.sound.play()
         else:
             print("Not enough food resources.")
 

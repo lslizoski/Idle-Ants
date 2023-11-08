@@ -7,7 +7,6 @@ from GameInteractions.FoodGenerator import FoodGenerator
 from kivy.animation import Animation
 from kivy.uix.image import Image
 from kivy.clock import Clock
-from kivy.core.audio import SoundLoader
 
 
 class WindowManager(ScreenManager):
@@ -92,7 +91,6 @@ class Queen(Screen):
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades(foodStorage)
     incubator = Incubator(queenUpgrades, foodStorage)
-    sound = SoundLoader.load('Audio/FoodMunch.mp3')
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -103,8 +101,6 @@ class Queen(Screen):
 
     def queenMultiplierUpgradeButton(self):
         self.queenUpgrades.upgradeEggMultiplier()
-        self.sound.volume = 1
-        self.sound.play()
 
     def updateCounters(self, *args):
         self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
@@ -144,7 +140,6 @@ class Incubator(Screen):
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades(foodStorage)
     incubator = Incubator(queenUpgrades, foodStorage)
-    sound = SoundLoader.load('Audio/EggSqulech.mp3')
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -152,8 +147,6 @@ class Incubator(Screen):
 
     def incubatorMultiplierUpgradeButton(self):
         self.incubator.upgradeHatchMultiplier()
-        self.sound.volume = 1
-        self.sound.play()
 
     def incubatorHatchSpeedUpgradeButton(self):
         self.incubator.upgradeHatchSpeed()
