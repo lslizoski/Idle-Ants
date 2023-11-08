@@ -5,28 +5,25 @@ from kivy.core.audio import SoundLoader
 
 class Incubator:
 
-    # Open json file for incubator room
-    incubatorUpgradesFile = JsonStore('Incubator.json')
-
-    # Hatch multiplier
-    hatchMultiplierTier = 1
-    hatchMultiplierTierStage = 1
-    hatchMultiplier = 1
-    hatchMultiplierIncrease = 1
-
-    # Hatch speed
-    hatchSpeedTier = 1
-    hatchSpeedTierStage = 1
-    hatchSpeed = 60
-    increasePercent = 0.025
-
-    antCounter = 0
-    sound = SoundLoader.load('Audio/EggSqulech.mp3')
-
     def __init__(self, queenUpgrades, foodStorage):
-        self.createFile()
+        # Open json file for incubator room
+        self.incubatorUpgradesFile = JsonStore('Incubator.json')
+
+        self.hatchMultiplierTier = 1
+        self.hatchMultiplierTierStage = 1
+        self.hatchMultiplier = 1
+        self.hatchMultiplierIncrease = 1
+
+        self.hatchSpeedTier = 1
+        self.hatchSpeedTierStage = 1
+        self.hatchSpeed = 60
+        self.increasePercent = 0.025
+
+        self.antCounter = 0
+        self.sound = SoundLoader.load('Audio/EggSqulech.mp3')
         self.queenUpgrades = queenUpgrades
         self.foodStorage = foodStorage
+        self.createFile()
 
     def getHatchSpeed(self):
         return self.hatchSpeed

@@ -5,22 +5,21 @@ from kivy.core.audio import SoundLoader
 
 class QueenUpgrades:
 
-    queenUpgradesFile = JsonStore('QueenUpgrades.json')
-    eggLaySpeed = 60
-    eggMultiplier = 1
-    upgradePercentage = 0.025
-
-    eggLaySpeedTier = 1
-    eggLaySpeedTierStage = 0
-    eggMultiplierTier = 1
-    eggMultiplierTierStage = 0
-
-    eggCounter = 0
-    sound = SoundLoader.load('Audio/FoodMunch.mp3')
-
     def __init__(self, foodStorage):
+        self.queenUpgradesFile = JsonStore('QueenUpgrades.json')
+
+        self.eggLaySpeed = 60
+        self.eggMultiplier = 1
+        self.upgradePercentage = 0.025
+
+        self.eggLaySpeedTier = 1
+        self.eggLaySpeedTierStage = 0
+        self.eggMultiplierTier = 1
+        self.eggMultiplierTierStage = 0
+
+        self.eggCounter = 0
+        self.sound = SoundLoader.load('Audio/FoodMunch.mp3')
         self.createFile()
-        self.loadSavedData()
         self.foodStorage = foodStorage
 
     def createFile(self):
@@ -28,6 +27,8 @@ class QueenUpgrades:
         fileExists = os.path.isfile(path)
         if not fileExists:
             self.setDefaultVariables()
+        else:
+            self.loadSavedData()
 
     def loadSavedData(self):
         self.eggLaySpeed = self.queenUpgradesFile.get('eggLaySpeed')['value']
