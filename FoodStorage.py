@@ -4,14 +4,16 @@ import os
 
 class FoodStorage:
 
-    def __init__(self):
-        self.storageUpgradesFile = JsonStore('FoodStorage.json')
+    # Open json file for incubator room and food storage
+    storageUpgradesFile = JsonStore('FoodStorage.json')
 
-        self.currentFoodUnits = 0
-        self.maxFoodCapacity = 50
-        self.foodMultiplier = 1
-        self.foodMultiplierTier = 1
-        self.foodMultiplierTierStage = 0
+    currentFoodUnits = 0
+    maxFoodCapacity = 50
+    foodMultiplier = 1
+    foodMultiplierTier = 1
+    foodMultiplierTierStage = 0
+
+    def __init__(self):
         self.createFile()
 
     def createFile(self):
@@ -20,8 +22,6 @@ class FoodStorage:
             self.storageUpgradesFile.put('currentFoodUnits', value=self.currentFoodUnits)
             self.storageUpgradesFile.put('maxFoodCapacity', value=self.maxFoodCapacity)
             self.storageUpgradesFile.put('foodMultiplier', value=self.foodMultiplier, foodMultiplierTier=self.foodMultiplierTier, foodMultiplierTierStage=self.foodMultiplierTierStage)
-        else:
-            self.loadSaveData()
 
     def loadSaveData(self):
         self.currentFoodUnits = self.storageUpgradesFile.get('currentFoodUnits')['value']
