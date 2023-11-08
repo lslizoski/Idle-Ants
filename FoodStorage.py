@@ -49,7 +49,11 @@ class FoodStorage:
             print("Not enough ant resources.")
 
     def upgradeFoodMultiplier(self, ants):
-        if (ants >= 50):
+        if self.getMultiplyTier() == 3:
+            print('Max Level Reached')
+        elif (ants >= 100):
+            self.foodMultiplierTier = self.storageUpgradesFile.get('foodMultiplier')['foodMultiplierTier']
+            self.foodMultiplierTierStage = self.storageUpgradesFile.get('foodMultiplier')['foodMultiplierTierStage']
             self.foodMultiplierTier, self.foodMultiplierTierStage, self.foodMultiplier = Promotions().multiplier(self.foodMultiplierTier, self.foodMultiplierTierStage, self.foodMultiplier)
             self.storageUpgradesFile.put('foodMultiplier', value=self.foodMultiplier, foodMultiplierTier=self.foodMultiplierTier, foodMultiplierTierStage=self.foodMultiplierTierStage)
             return True

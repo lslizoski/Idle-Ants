@@ -16,7 +16,7 @@ class WindowManager(ScreenManager):
 class Home(Screen):
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades(foodStorage)
-    incubator = Incubator(queenUpgrades)
+    incubator = Incubator(queenUpgrades, foodStorage)
     foodGenerator = FoodGenerator()
     hatchClock = 1
     layClock = 1
@@ -37,11 +37,9 @@ class Home(Screen):
         if self.hatchClock - self.incubator.getHatchSpeed() >= 0:
             self.hatchEgg()
             self.hatchClock = 1
-            print("Hatch", self.incubator.getHatchSpeed())
         if self.layClock - self.queenUpgrades.getEggLaySpeed() >= 0:
             self.layEgg()
             self.layClock = 1
-            print("lay", self.queenUpgrades.getEggLaySpeed())
 
         self.hatchClock += 0.1
         self.layClock += 0.1
@@ -59,24 +57,26 @@ class Home(Screen):
         self.ids.egg_count.text = str('Eggs: ' + str(self.queenUpgrades.getEggs()))
 
     def setAnt(self):
-        self.incubator.setAnts(self.incubator.getHatchMultiTier())
+        self.incubator.setAnts(1)
 
     def layEgg(self):
         self.queenUpgrades.setEggs(self.queenUpgrades.getLayMultiTier())
 
     def hatchEgg(self):
-        if self.queenUpgrades.getEggs() == 0:
+        if self.queenUpgrades.getEggs() <= 0:
             pass
         else:
             self.incubator.setAnts(self.incubator.getHatchMultiTier())
             self.queenUpgrades.setEggs(0 - (self.queenUpgrades.getLayMultiTier()))
-        self.foodStorage.addFood(self.foodGenerator.chooseFood() * self.foodStorage.getFoodMultiplier())
+            self.foodStorage.addFood(self.foodGenerator.chooseFood() * self.foodStorage.getMultiplyTier())
+            if self.queenUpgrades.getEggs() <= 0:
+                self.queenUpgrades.setEggs(0)
 
 
 class Menu(Screen):
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades(foodStorage)
-    incubator = Incubator(queenUpgrades)
+    incubator = Incubator(queenUpgrades, foodStorage)
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -91,7 +91,7 @@ class Menu(Screen):
 class Queen(Screen):
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades(foodStorage)
-    incubator = Incubator(queenUpgrades)
+    incubator = Incubator(queenUpgrades, foodStorage)
     sound = SoundLoader.load('Audio/FoodMunch.mp3')
 
     def __init__(self, **kw):
@@ -119,7 +119,7 @@ class Queen(Screen):
 class Storage(Screen):
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades(foodStorage)
-    incubator = Incubator(queenUpgrades)
+    incubator = Incubator(queenUpgrades, foodStorage)
     def __init__(self, **kw):
         super().__init__(**kw)
         Clock.schedule_interval(self.updateCounters, 0.1)
@@ -130,7 +130,7 @@ class Storage(Screen):
 
     def foodMultiplyButton(self):
         if self.foodStorage.upgradeFoodMultiplier(self.incubator.getAnts()):
-            self.incubator.setAnts(-50)
+            self.incubator.setAnts(-100)
 
     def updateCounters(self, *args):
         self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
@@ -143,7 +143,7 @@ class Storage(Screen):
 class Incubator(Screen):
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades(foodStorage)
-    incubator = Incubator(queenUpgrades)
+    incubator = Incubator(queenUpgrades, foodStorage)
     sound = SoundLoader.load('Audio/EggSqulech.mp3')
 
     def __init__(self, **kw):

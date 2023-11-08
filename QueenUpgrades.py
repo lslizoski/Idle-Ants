@@ -43,6 +43,8 @@ class QueenUpgrades:
         self.queenUpgradesFile.put('eggCounter', value=self.eggCounter)
 
     def upgradeEggLaySpeed(self):
+        if self.getLaySpeedTier() == 5 and self.getLaySpeedTierStage() == 5:
+            print('Max Level Reached')
         if (self.foodStorage.getFood() >= 50):
             self.foodStorage.addFood(-50)
             self.eggLaySpeed -= self.eggLaySpeed * self.upgradePercentage
@@ -52,7 +54,9 @@ class QueenUpgrades:
             print("Not enough food resources.")
 
     def upgradeEggMultiplier(self):
-        if (self.foodStorage.getFood() >= 100):
+        if self.getLayMultiTier() == 3:
+            print('Max Level Reached')
+        elif (self.foodStorage.getFood() >= 100):
             self.foodStorage.addFood(-100)
             self.eggMultiplierTier, self.eggMultiplierTierStage, self.eggMultiplier = Promotions().multiplier(self.eggMultiplierTier, self.eggMultiplierTierStage, self.eggMultiplier)
             self.queenUpgradesFile.put('eggMultiplier', value=self.eggMultiplier, eggMultiplierTier=self.eggMultiplierTier, eggMultiplierTierStage=self.eggMultiplierTierStage)

@@ -21,9 +21,10 @@ class Incubator:
 
     antCounter = 0
 
-    def __init__(self, queenUpgrades):
+    def __init__(self, queenUpgrades, foodStorage):
         self.createFile()
         self.queenUpgrades = queenUpgrades
+        self.foodStorage = foodStorage
 
     def getHatchSpeed(self):
         return self.hatchSpeed
@@ -52,14 +53,25 @@ class Incubator:
             self.loadSaveData()
 
     def upgradeHatchSpeed(self):
-        self.hatchSpeed -= self.hatchSpeed * self.increasePercent
-        self.hatchSpeedTier, self.hatchSpeedTierStage, self.increasePercent = Promotions().percentage(self.hatchSpeedTier, self.hatchSpeedTierStage, self.increasePercent)
-        self.incubatorUpgradesFile.put('hatchSpeed', value=self.hatchSpeed, hatchSpeedTier=self.hatchSpeedTier, hatchSpeedTierStage=self.hatchSpeedTierStage)
+        if self.getHatchSpeedTier() == 5 and self.getHatchSpeedTierStage() == 5:
+            print('Max Level Reached')
+        elif (self.foodStorage.getFood() >= 50):
+            self.foodStorage.addFood(-50)
+            self.hatchSpeed -= self.hatchSpeed * self.increasePercent
+            self.hatchSpeedTier, self.hatchSpeedTierStage, self.increasePercent = Promotions().percentage(self.hatchSpeedTier, self.hatchSpeedTierStage, self.increasePercent)
+            self.incubatorUpgradesFile.put('hatchSpeed', value=self.hatchSpeed, hatchSpeedTier=self.hatchSpeedTier, hatchSpeedTierStage=self.hatchSpeedTierStage)
+        else:
+            print("Not enough food resources.")
 
     def upgradeHatchMultiplier(self):
-        self.hatchMultiplier = self.hatchMultiplierTier
-        self.hatchMultiplierTier, self.hatchMultiplierTierStage, self.hatchMultiplier = Promotions().multiplier(self.hatchMultiplierTier, self.hatchMultiplierTierStage, self.hatchMultiplier)
-        self.incubatorUpgradesFile.put('hatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
+        if self.getHatchMultiTier() == 3:
+            print('Max Level Reached')
+        elif (self.foodStorage.getFood() >= 100):
+            self.foodStorage.addFood(-100)
+            self.hatchMultiplierTier, self.hatchMultiplierTierStage, self.hatchMultiplier = Promotions().multiplier(self.hatchMultiplierTier, self.hatchMultiplierTierStage, self.hatchMultiplier)
+            self.incubatorUpgradesFile.put('hatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
+        else:
+            print("Not enough food resources.")
 
     def hatchEgg(self):
         self.queenUpgrades.setEggs(self.queenUpgrades.getEggs() - 1)
