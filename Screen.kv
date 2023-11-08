@@ -188,10 +188,10 @@ WindowManager:
             pos_hint: {'right': 1, 'y': 0.14}
 
         Button:
-            text: "LAX SPEED"
+            text: "  LAX SPEED\nCOST 50 ANTS"
             size_hint: .50, .15
             pos_hint: {'left': 1,'bottom': 1}
-            font_size: 50
+            font_size: 30
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.queenEggSpeedUpgradeButton()
@@ -199,10 +199,10 @@ WindowManager:
 
 
         Button:
-            text: "MULTI EGG"
+            text: "  MULTI EGG\nCOST 100 ANTS"
             size_hint: .50, .15
             pos_hint: {'right': 1, 'bottom': 1}
-            font_size: 50
+            font_size: 30
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.queenMultiplierUpgradeButton()
@@ -274,20 +274,20 @@ WindowManager:
             pos_hint: {'right': 1, 'y': 0.14}
 
         Button:
-            text: "HATCH SPEED"
+            text: " HATCH SPEED\nCOST 50 ANTS"
             size_hint: .50, .15
             pos_hint: {'left': 1, 'bottom': 1}
-            font_size: 45
+            font_size: 25
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.incubatorHatchSpeedUpgradeButton()
             background_color: 1, 0, 1, 1
 
         Button:
-            text: "MULTI HATCH"
+            text: " MULTI HATCH\nCOST 100 ANTS"
             size_hint: .50, .15
             pos_hint: {'right': 1, 'bottom': 1}
-            font_size: 45
+            font_size: 25
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.incubatorMultiplierUpgradeButton()
@@ -346,19 +346,19 @@ WindowManager:
             pos_hint: {'right': 1, 'y': 0.14}
 
         Button:
-            text: "UPGRADE CAP"
+            text: "UPGRADE CAP\nCOST 50 FOOD"
             size_hint: .5, .15
             pos_hint: {'left': 1, 'bottom': 1}
-            font_size: 45
+            font_size: 25
             font_name: "fonts/Ant.ttf"
             on_release: root.foodUpgradeButton()
             background_color: 1, 0, 1, 1
 
         Button:
-            text: "MULTI GATHER"
+            text: "MULTI GATHER\nCOST 100 FOOD"
             size_hint: .50, .15
             pos_hint: {'right': 1, 'bottom': 1}
-            font_size: 45
+            font_size: 25
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.foodMultiplyButton()
