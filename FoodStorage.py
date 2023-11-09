@@ -19,6 +19,11 @@ class FoodStorage:
     def createFile(self):
         path = 'FoodStorage.json'
         if not os.path.isfile(path):
+            self.currentFoodUnits = 0
+            self.maxFoodCapacity = 50
+            self.foodMultiplier = 1
+            self.foodMultiplierTier = 1
+            self.foodMultiplierTierStage = 0
             self.storageUpgradesFile.put('currentFoodUnits', value=self.currentFoodUnits)
             self.storageUpgradesFile.put('maxFoodCapacity', value=self.maxFoodCapacity)
             self.storageUpgradesFile.put('foodMultiplier', value=self.foodMultiplier, foodMultiplierTier=self.foodMultiplierTier, foodMultiplierTierStage=self.foodMultiplierTierStage)

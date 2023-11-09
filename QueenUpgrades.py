@@ -40,6 +40,14 @@ class QueenUpgrades:
         self.eggCounter = self.queenUpgradesFile.get('eggCounter')['value']
 
     def setDefaultVariables(self):
+        self.eggLaySpeed = 30
+        self.eggMultiplier = 1
+        self.upgradePercentage = 0.025
+        self.eggLaySpeedTier = 1
+        self.eggLaySpeedTierStage = 0
+        self.eggMultiplierTier = 1
+        self.eggMultiplierTierStage = 0
+        self.eggCounter = 0
         self.queenUpgradesFile.put('eggLaySpeed', value=self.eggLaySpeed, eggLaySpeedTier=self.eggLaySpeedTier, eggLaySpeedTierStage=self.eggLaySpeedTierStage)
         self.queenUpgradesFile.put('eggMultiplier', value=self.eggMultiplier, eggMultiplierTier=self.eggMultiplierTier, eggMultiplierTierStage=self.eggMultiplierTierStage)
         self.queenUpgradesFile.put('eggCounter', value=self.eggCounter)

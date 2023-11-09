@@ -47,6 +47,15 @@ class Incubator:
     def createFile(self):
         path = 'Incubator.json'
         if not os.path.isfile(path):
+            self.hatchMultiplierTier = 1
+            self.hatchMultiplierTierStage = 1
+            self.hatchMultiplier = 1
+            self.hatchMultiplierIncrease = 1
+            self.hatchSpeedTier = 1
+            self.hatchSpeedTierStage = 1
+            self.hatchSpeed = 30
+            self.increasePercent = 0.025
+            self.antCounter = 0
             self.incubatorUpgradesFile.put('hatchMultiplier', value=self.hatchMultiplier, hatchMultiplierTier=self.hatchMultiplierTier, hatchMultiplierTierStage=self.hatchMultiplierTierStage)
             self.incubatorUpgradesFile.put('hatchSpeed', value=self.hatchSpeed, hatchSpeedTier=self.hatchSpeedTier, hatchSpeedTierStage=self.hatchSpeedTierStage)
             self.incubatorUpgradesFile.put('antCounter', value=self.antCounter)

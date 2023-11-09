@@ -1,5 +1,4 @@
 import os
-
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
 from Incubator import Incubator
@@ -9,10 +8,12 @@ from GameInteractions.FoodGenerator import FoodGenerator
 from kivy.animation import Animation
 from kivy.uix.image import Image
 from kivy.clock import Clock
+from random import randint
 
 
 class WindowManager(ScreenManager):
     pass
+
 
 class Home(Screen):
     foodStorage = FoodStorage()
@@ -59,6 +60,8 @@ class Home(Screen):
 
     def setAnt(self):
         self.incubator.setAnts(1)
+        if randint(0,10) == 3:
+            self.foodStorage.addFood(1)
 
     def layEgg(self):
         self.queenUpgrades.setEggs(self.queenUpgrades.getLayMultiTier())
