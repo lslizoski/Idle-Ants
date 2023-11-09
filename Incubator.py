@@ -17,7 +17,7 @@ class Incubator:
     # Hatch speed
     hatchSpeedTier = 1
     hatchSpeedTierStage = 1
-    hatchSpeed = 60
+    hatchSpeed = 30
     increasePercent = 0.025
 
     antCounter = 0

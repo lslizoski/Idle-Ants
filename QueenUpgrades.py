@@ -6,7 +6,7 @@ from kivy.core.audio import SoundLoader
 class QueenUpgrades:
 
     queenUpgradesFile = JsonStore('QueenUpgrades.json')
-    eggLaySpeed = 60
+    eggLaySpeed = 30
     eggMultiplier = 1
     upgradePercentage = 0.025
 

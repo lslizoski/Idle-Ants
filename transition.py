@@ -17,12 +17,12 @@ class Home(Screen):
     queenUpgrades = QueenUpgrades(foodStorage)
     incubator = Incubator(queenUpgrades, foodStorage)
     foodGenerator = FoodGenerator()
-    hatchClock = 1
-    layClock = 1
+    hatchClock = 0
+    layClock = 0
 
     def __init__(self, **kwargs):
         super(Home, self).__init__(**kwargs)
-        ant = Image(source="images/ant.png")
+        ant = Image(source="images/AntSugar.png")
 
         # Add the image to the layout
         ant.pos = (0, -100)
@@ -35,20 +35,20 @@ class Home(Screen):
         self.updateCounters()
         if self.hatchClock - self.incubator.getHatchSpeed() >= 0:
             self.hatchEgg()
-            self.hatchClock = 1
+            self.hatchClock = 0
         if self.layClock - self.queenUpgrades.getEggLaySpeed() >= 0:
             self.layEgg()
-            self.layClock = 1
-
+            self.layClock = 0
+        if self.ids.ant_progress_bar.value >= self.incubator.getHatchSpeed():
+            self.ids.ant_progress_bar.value = 0
+        self.ids.ant_progress_bar.value += 0.1
+        self.ids.ant_progress_bar.max = self.incubator.getHatchSpeed()
         self.hatchClock += 0.1
+        if self.ids.egg_progress_bar.value >= self.queenUpgrades.getEggLaySpeed():
+            self.ids.egg_progress_bar.value = 0
+        self.ids.egg_progress_bar.value += 0.1
+        self.ids.egg_progress_bar.max = self.queenUpgrades.getEggLaySpeed()
         self.layClock += 0.1
-
-    def start(self):
-        Clock.unschedule(self.timers)
-        Clock.schedule_interval(self.timers, 0.1)
-
-    def stop(self):
-        Clock.unschedule(self.timers)
 
     def updateCounters(self):
         self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
@@ -76,6 +76,8 @@ class Menu(Screen):
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades(foodStorage)
     incubator = Incubator(queenUpgrades, foodStorage)
+    hatchClock = 0
+    layClock = 0
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -85,12 +87,24 @@ class Menu(Screen):
         self.ids.ant_count.text = str('Ants: ' + str(self.incubator.getAnts()))
         self.ids.food_count.text = str('Food: ' + str(self.foodStorage.getFood()) + '/' + str(self.foodStorage.getMaxFood()))
         self.ids.egg_count.text = str('Eggs: ' + str(self.queenUpgrades.getEggs()))
+        if self.ids.ant_progress_bar.value >= self.incubator.getHatchSpeed():
+            self.ids.ant_progress_bar.value = 0
+        self.ids.ant_progress_bar.value += 0.1
+        self.ids.ant_progress_bar.max = self.incubator.getHatchSpeed()
+        self.hatchClock += 0.1
+        if self.ids.egg_progress_bar.value >= self.queenUpgrades.getEggLaySpeed():
+            self.ids.egg_progress_bar.value = 0
+        self.ids.egg_progress_bar.value += 0.1
+        self.ids.egg_progress_bar.max = self.queenUpgrades.getEggLaySpeed()
+        self.layClock += 0.1
 
 
 class Queen(Screen):
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades(foodStorage)
     incubator = Incubator(queenUpgrades, foodStorage)
+    hatchClock = 0
+    layClock = 0
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -110,12 +124,24 @@ class Queen(Screen):
         self.ids.speed_stage.text = str('STAGE:' + str(self.queenUpgrades.getLaySpeedTierStage()))
         self.ids.multi_tier.text = str('TIER:' + str(self.queenUpgrades.getLayMultiTier()))
         self.ids.multi_stage.text = str('STAGE:' + str(self.queenUpgrades.getLayMultiTierStage()))
+        if self.ids.ant_progress_bar.value >= self.incubator.getHatchSpeed():
+            self.ids.ant_progress_bar.value = 0
+        self.ids.ant_progress_bar.value += 0.1
+        self.ids.ant_progress_bar.max = self.incubator.getHatchSpeed()
+        self.hatchClock += 0.1
+        if self.ids.egg_progress_bar.value >= self.queenUpgrades.getEggLaySpeed():
+            self.ids.egg_progress_bar.value = 0
+        self.ids.egg_progress_bar.value += 0.1
+        self.ids.egg_progress_bar.max = self.queenUpgrades.getEggLaySpeed()
+        self.layClock += 0.1
 
 
 class Storage(Screen):
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades(foodStorage)
     incubator = Incubator(queenUpgrades, foodStorage)
+    hatchClock = 0
+    layClock = 0
     def __init__(self, **kw):
         super().__init__(**kw)
         Clock.schedule_interval(self.updateCounters, 0.1)
@@ -134,12 +160,24 @@ class Storage(Screen):
         self.ids.egg_count.text = str('Eggs: ' + str(self.queenUpgrades.getEggs()))
         self.ids.multi_tier.text = str('TIER:' + str(self.foodStorage.getMultiplyTier()))
         self.ids.multi_stage.text = str('STAGE:' + str(self.foodStorage.getMultiplyTierStage()))
+        if self.ids.ant_progress_bar.value >= self.incubator.getHatchSpeed():
+            self.ids.ant_progress_bar.value = 0
+        self.ids.ant_progress_bar.value += 0.1
+        self.ids.ant_progress_bar.max = self.incubator.getHatchSpeed()
+        self.hatchClock += 0.1
+        if self.ids.egg_progress_bar.value >= self.queenUpgrades.getEggLaySpeed():
+            self.ids.egg_progress_bar.value = 0
+        self.ids.egg_progress_bar.value += 0.1
+        self.ids.egg_progress_bar.max = self.queenUpgrades.getEggLaySpeed()
+        self.layClock += 0.1
 
 
 class Incubator(Screen):
     foodStorage = FoodStorage()
     queenUpgrades = QueenUpgrades(foodStorage)
     incubator = Incubator(queenUpgrades, foodStorage)
+    hatchClock = 0
+    layClock = 0
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -159,6 +197,16 @@ class Incubator(Screen):
         self.ids.speed_stage.text = str('STAGE:' + str(self.incubator.getHatchSpeedTierStage()))
         self.ids.multi_tier.text = str('TIER:' + str(self.incubator.getHatchMultiTier()))
         self.ids.multi_stage.text = str('STAGE:' + str(self.incubator.getHatchMultiTierStage()))
+        if self.ids.ant_progress_bar.value >= self.incubator.getHatchSpeed():
+            self.ids.ant_progress_bar.value = 0
+        self.ids.ant_progress_bar.value += 0.1
+        self.ids.ant_progress_bar.max = self.incubator.getHatchSpeed()
+        self.hatchClock += 0.1
+        if self.ids.egg_progress_bar.value >= self.queenUpgrades.getEggLaySpeed():
+            self.ids.egg_progress_bar.value = 0
+        self.ids.egg_progress_bar.value += 0.1
+        self.ids.egg_progress_bar.max = self.queenUpgrades.getEggLaySpeed()
+        self.layClock += 0.1
 
 
 class ScreenApp(App):

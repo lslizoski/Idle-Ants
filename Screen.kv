@@ -32,6 +32,14 @@ WindowManager:
             size_hint: .34, 1
             pos_hint: {'x':0, 'top': 1.45}
 
+        ProgressBar:
+            id: ant_progress_bar
+            value: 0
+            size_hint_x: .06
+            pos_hint: {'x':.14, 'top': 1.43}
+            min: 0
+            max: 30
+
         Label:
             id: food_count
             text: "2"
@@ -43,6 +51,14 @@ WindowManager:
             text: "3"
             size_hint: .33, 1
             pos_hint: {'right':1, 'top': 1.45}
+
+        ProgressBar:
+            id: egg_progress_bar
+            value: 0
+            size_hint_x: .06
+            pos_hint: {'x':.805, 'top': 1.43}
+            min: 0
+            max: 30
 
         # Button to go underground
         Button:
@@ -74,6 +90,14 @@ WindowManager:
             size_hint: .34, 1
             pos_hint: {'x':0, 'top': 1.4}
 
+        ProgressBar:
+            id: ant_progress_bar
+            value: 0
+            size_hint_x: .06
+            pos_hint: {'x':.14, 'top': 1.38}
+            min: 0
+            max: 30
+
         Label:
             id: food_count
             text: "2"
@@ -85,6 +109,14 @@ WindowManager:
             text: "3"
             size_hint: .33, 1
             pos_hint: {'right':1, 'top': 1.4}
+
+        ProgressBar:
+            id: egg_progress_bar
+            value: 0
+            size_hint_x: .06
+            pos_hint: {'x':.805, 'top': 1.38}
+            min: 0
+            max: 30
 
 
         # Button to go to food room
@@ -151,6 +183,14 @@ WindowManager:
             size_hint: .34, 1
             pos_hint: {'x':0, 'top': 1.38}
 
+        ProgressBar:
+            id: ant_progress_bar
+            value: 0
+            size_hint_x: .06
+            pos_hint: {'x':.14, 'top': 1.36}
+            min: 0
+            max: 30
+
         Label:
             id: food_count
             text: "2"
@@ -162,6 +202,14 @@ WindowManager:
             text: "3"
             size_hint: .33, 1
             pos_hint: {'right':1, 'top': 1.38}
+
+        ProgressBar:
+            id: egg_progress_bar
+            value: 0
+            size_hint_x: .06
+            pos_hint: {'x':.805, 'top': 1.36}
+            min: 0
+            max: 30
 
         Label:
             id: speed_tier
@@ -188,10 +236,10 @@ WindowManager:
             pos_hint: {'right': 1, 'y': 0.14}
 
         Button:
-            text: "  LAX SPEED\nCOST 50 ANTS"
+            text: "  LAX SPEED\nCOST 50 FOOD"
             size_hint: .50, .15
             pos_hint: {'left': 1,'bottom': 1}
-            font_size: 30
+            font_size: 50
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.queenEggSpeedUpgradeButton()
@@ -199,10 +247,10 @@ WindowManager:
 
 
         Button:
-            text: "  MULTI EGG\nCOST 100 ANTS"
+            text: "  MULTI EGG\nCOST 100 FOOD"
             size_hint: .50, .15
             pos_hint: {'right': 1, 'bottom': 1}
-            font_size: 30
+            font_size: 50
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.queenMultiplierUpgradeButton()
@@ -237,6 +285,14 @@ WindowManager:
             size_hint: .34, 1
             pos_hint: {'x':0, 'top': 1.38}
 
+        ProgressBar:
+            id: ant_progress_bar
+            value: 0
+            size_hint_x: .06
+            pos_hint: {'x':.14, 'top': 1.36}
+            min: 0
+            max: 30
+
         Label:
             id: food_count
             text: "2"
@@ -248,6 +304,14 @@ WindowManager:
             text: "3"
             size_hint: .33, 1
             pos_hint: {'right':1, 'top': 1.38}
+
+        ProgressBar:
+            id: egg_progress_bar
+            value: 0
+            size_hint_x: .06
+            pos_hint: {'x':.805, 'top': 1.36}
+            min: 0
+            max: 30
 
         Label:
             id: speed_tier
@@ -274,20 +338,20 @@ WindowManager:
             pos_hint: {'right': 1, 'y': 0.14}
 
         Button:
-            text: " HATCH SPEED\nCOST 50 ANTS"
+            text: " HATCH SPEED\nCOST 50 FOOD"
             size_hint: .50, .15
             pos_hint: {'left': 1, 'bottom': 1}
-            font_size: 25
+            font_size: 50
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.incubatorHatchSpeedUpgradeButton()
             background_color: 1, 0, 1, 1
 
         Button:
-            text: " MULTI HATCH\nCOST 100 ANTS"
+            text: " MULTI HATCH\nCOST 100 FOOD"
             size_hint: .50, .15
             pos_hint: {'right': 1, 'bottom': 1}
-            font_size: 25
+            font_size: 50
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.incubatorMultiplierUpgradeButton()
@@ -321,6 +385,14 @@ WindowManager:
             size_hint: .34, 1
             pos_hint: {'x':0, 'top': 1.38}
 
+        ProgressBar:
+            id: ant_progress_bar
+            value: 0
+            size_hint_x: .06
+            pos_hint: {'x':.14, 'top': 1.36}
+            min: 0
+            max: 30
+
         Label:
             id: food_count
             text: "2"
@@ -332,6 +404,14 @@ WindowManager:
             text: "3"
             size_hint: .33, 1
             pos_hint: {'right':1, 'top': 1.38}
+
+        ProgressBar:
+            id: egg_progress_bar
+            value: 0
+            size_hint_x: .06
+            pos_hint: {'x':.805, 'top': 1.36}
+            min: 0
+            max: 30
 
         Label:
             id: multi_tier
@@ -349,7 +429,7 @@ WindowManager:
             text: "UPGRADE CAP\nCOST 50 FOOD"
             size_hint: .5, .15
             pos_hint: {'left': 1, 'bottom': 1}
-            font_size: 25
+            font_size: 50
             font_name: "fonts/Ant.ttf"
             on_release: root.foodUpgradeButton()
             background_color: 1, 0, 1, 1
@@ -358,7 +438,7 @@ WindowManager:
             text: "MULTI GATHER\nCOST 100 FOOD"
             size_hint: .50, .15
             pos_hint: {'right': 1, 'bottom': 1}
-            font_size: 25
+            font_size: 50
             font_name: "fonts/Ant.ttf"
             on_release:
                 root.foodMultiplyButton()

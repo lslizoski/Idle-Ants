@@ -6,19 +6,19 @@ class Promotions:
     def percentage(self, tier, tierStage, oldPercent):
         newPercent = oldPercent
         if tier == 1:
-            newPercent = 0.025
-            tierStage += 1
-        if tier == 2:
-            newPercent = 0.05
-            tierStage += 1
-        elif tier == 3:
-            newPercent = 0.075
-            tierStage += 1
-        elif tier == 4:
             newPercent = 0.1
             tierStage += 1
-        elif tier == 5 and tierStage < 5:
+        if tier == 2:
             newPercent = 0.15
+            tierStage += 1
+        elif tier == 3:
+            newPercent = 0.2
+            tierStage += 1
+        elif tier == 4:
+            newPercent = 0.25
+            tierStage += 1
+        elif tier == 5 and tierStage < 5:
+            newPercent = 0.3
             tierStage += 1
         if tierStage >= 5 and tier != 5:
             tier += 1
