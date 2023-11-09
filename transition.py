@@ -1,3 +1,5 @@
+import os
+
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
 from Incubator import Incubator
@@ -97,6 +99,14 @@ class Menu(Screen):
         self.ids.egg_progress_bar.value += 0.1
         self.ids.egg_progress_bar.max = self.queenUpgrades.getEggLaySpeed()
         self.layClock += 0.1
+
+    def reset_stats(self):
+        os.remove('FoodStorage.json')
+        os.remove('Incubator.json')
+        os.remove('QueenUpgrades.json')
+        self.foodStorage.createFile()
+        self.incubator.createFile()
+        self.queenUpgrades.createFile()
 
 
 class Queen(Screen):
