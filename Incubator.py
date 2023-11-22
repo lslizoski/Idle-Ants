@@ -48,11 +48,11 @@ class Incubator:
         path = 'Incubator.json'
         if not os.path.isfile(path):
             self.hatchMultiplierTier = 1
-            self.hatchMultiplierTierStage = 1
+            self.hatchMultiplierTierStage = 0
             self.hatchMultiplier = 1
             self.hatchMultiplierIncrease = 1
             self.hatchSpeedTier = 1
-            self.hatchSpeedTierStage = 1
+            self.hatchSpeedTierStage = 0
             self.hatchSpeed = 30
             self.increasePercent = 0.025
             self.antCounter = 0

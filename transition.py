@@ -25,14 +25,34 @@ class Home(Screen):
 
     def __init__(self, **kwargs):
         super(Home, self).__init__(**kwargs)
-        ant = Image(source="images/AntSugar.png")
-
-        # Add the image to the layout
-        ant.pos = (0, -100)
-        self.add_widget(ant)
-        anim = Animation(x=250, y=-410, duration=5) + Animation(x=500, duration=5) + Animation(y=-500, duration=0.1) + Animation(x=-500, y=-500, duration=0.1)
-        anim.start(ant)
         Clock.schedule_interval(self.timers, 0.1)
+        #Clock.schedule_interval(self.ant_leave_animation, 1)
+
+    def ant_leave_animation(self, *args):
+        ant = Image(source="images/ant.png")
+        ant.pos = (50, -140)
+        self.add_widget(ant)
+        anim = (Animation(x=250, y=-410, duration=5) +
+                Animation(x=500, duration=5))
+        anim.bind(on_complete=lambda *args : self.remove_widget(ant))
+        anim.bind(on_complete=self.ant_return_animation)
+        anim.start(ant)
+
+    def ant_return_animation(self, *args):
+        food_type = randint(1, 3)
+        if food_type == 1:
+            ant = Image(source="images/AntLeaf.png")
+        elif food_type == 2:
+            ant = Image(source="images/AntBread.png")
+        elif food_type == 3:
+            ant = Image(source="images/AntSugar.png")
+        ant.pos = (-500, -410)
+        self.add_widget(ant)
+        anim = (Animation(x=-250, y=-410, duration=5) +
+                Animation(x=-50, y=-160, duration=5))
+        anim.bind(on_complete=lambda *args: self.remove_widget(ant))
+        anim.start(ant)
+
 
     def timers(self, interval):
         self.updateCounters()
@@ -70,6 +90,7 @@ class Home(Screen):
         if self.queenUpgrades.getEggs() <= 0:
             pass
         else:
+            self.ant_leave_animation()
             self.incubator.setAnts(self.incubator.getHatchMultiTier())
             self.queenUpgrades.setEggs(0 - (self.queenUpgrades.getLayMultiTier()))
             self.foodStorage.addFood(self.foodGenerator.chooseFood() * self.foodStorage.getMultiplyTier())
