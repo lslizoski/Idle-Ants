@@ -50,6 +50,7 @@ class Home(Screen):
         anim = (Animation(x=-250, y=-410, duration=5) +
                 Animation(x=-50, y=-160, duration=5))
         anim.bind(on_complete=lambda *args: self.remove_widget(ant))
+        anim.bind(on_complete=lambda *args: self.foodStorage.addFood(food_type * self.foodStorage.getMultiplyTier()))
         anim.start(ant)
 
     def timers(self, interval):
@@ -91,7 +92,6 @@ class Home(Screen):
             self.ant_leave_animation()
             self.incubator.setAnts(self.incubator.getHatchMultiTier())
             self.queenUpgrades.setEggs(0 - (self.queenUpgrades.getLayMultiTier()))
-            self.foodStorage.addFood(self.foodGenerator.chooseFood() * self.foodStorage.getMultiplyTier())
             if self.queenUpgrades.getEggs() <= 0:
                 self.queenUpgrades.setEggs(0)
 
