@@ -26,7 +26,6 @@ class Home(Screen):
     def __init__(self, **kwargs):
         super(Home, self).__init__(**kwargs)
         Clock.schedule_interval(self.timers, 0.1)
-        #Clock.schedule_interval(self.ant_leave_animation, 1)
 
     def ant_leave_animation(self, *args):
         ant = Image(source="images/ant.png")
@@ -52,7 +51,6 @@ class Home(Screen):
                 Animation(x=-50, y=-160, duration=5))
         anim.bind(on_complete=lambda *args: self.remove_widget(ant))
         anim.start(ant)
-
 
     def timers(self, interval):
         self.updateCounters()
