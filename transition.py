@@ -8,6 +8,7 @@ from GameInteractions.FoodGenerator import FoodGenerator
 from kivy.animation import Animation
 from kivy.uix.image import Image
 from kivy.clock import Clock
+from kivy.config import Config
 from random import randint
 
 
@@ -29,10 +30,10 @@ class Home(Screen):
 
     def ant_leave_animation(self, *args):
         ant = Image(source="images/ant.png")
-        ant.pos = (50, -140)
+        ant.pos_hint = {'center_x': 0.53, 'center_y': 0.4}
         self.add_widget(ant)
-        anim = (Animation(x=250, y=-410, duration=5) +
-                Animation(x=500, duration=5))
+        anim = (Animation(pos_hint={'center_x': 0.77, 'center_y': 0.23}, duration=5) +
+                Animation(pos_hint={'center_x': 1, 'center_y': 0.23}, duration=5))
         anim.bind(on_complete=lambda *args : self.remove_widget(ant))
         anim.bind(on_complete=self.ant_return_animation)
         anim.start(ant)
@@ -45,10 +46,10 @@ class Home(Screen):
             ant = Image(source="images/AntBread.png")
         elif food_type == 3:
             ant = Image(source="images/AntSugar.png")
-        ant.pos = (-500, -410)
+        ant.pos_hint = {'center_x': 0, 'center_y': 0.23}
         self.add_widget(ant)
-        anim = (Animation(x=-250, y=-410, duration=5) +
-                Animation(x=-50, y=-160, duration=5))
+        anim = (Animation(pos_hint={'center_x': 0.27, 'center_y': 0.23}, duration=5) +
+                Animation(pos_hint={'center_x': 0.47, 'center_y': 0.4}, duration=5))
         anim.bind(on_complete=lambda *args: self.remove_widget(ant))
         anim.bind(on_complete=lambda *args: self.foodStorage.addFood(food_type * self.foodStorage.getMultiplyTier()))
         anim.start(ant)
@@ -246,5 +247,8 @@ class ScreenApp(App):
         return
 
 
+# set screen size
+Config.set('graphics', 'width', '480')
+Config.set('graphics', 'height', '800')
 # run the app
 ScreenApp().run()
