@@ -121,8 +121,9 @@ class Home(Screen):
     def reset_ants(self, *args):
         for ant in self.antList:
             self.leave_anim.cancel_all(ant)
-            self.return_anim.cancel_all(ant)
             self.remove_widget(ant)
+            try: self.return_anim.cancel_all(ant)
+            except: pass
         self.antList.clear()
 
     def reset_stats(self):
