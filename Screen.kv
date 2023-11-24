@@ -71,6 +71,15 @@ WindowManager:
 				root.manager.current = 'Menu'
 		    background_color: 1, 0, 1, 1
 
+	    # button to reset all files
+        Button:
+            text: "Restart"
+            size_hint: .10, .025
+            pos_hint: {'right': 1, 'bottom': 0}
+            on_release:
+				root.reset_stats()
+		    background_color: 1, 0, 1, 1
+
 <Menu>:
     name: "Menu"
 
@@ -165,14 +174,6 @@ WindowManager:
                 root.manager.current = 'Home'
             background_color: 1, 0, 1, 1
 
-        # button to reset all files
-        Button:
-            text: "Restart"
-            size_hint: .25, .05
-            pos_hint: {'center_x': 0.5, 'bottom': 0}
-            on_release:
-				root.reset_stats()
-		    background_color: 1, 0, 1, 1
 
 <Queen>:
     name: "Queen"
