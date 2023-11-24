@@ -79,8 +79,12 @@ class QueenUpgrades:
     def getEggLaySpeed(self):
         return self.queenUpgradesFile.get('eggLaySpeed')['value']
 
-    def setEggs(self, amount):
+    def addEggs(self, amount):
         self.eggCounter += amount
+        self.queenUpgradesFile.put('eggCounter', value=self.eggCounter)
+
+    def setEggs(self, amount):
+        self.eggCounter = amount
         self.queenUpgradesFile.put('eggCounter', value=self.eggCounter)
 
     def getEggs(self):

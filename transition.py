@@ -90,15 +90,31 @@ class Home(Screen):
             self.foodStorage.addFood(1)
 
     def layEgg(self):
-        self.queenUpgrades.setEggs(self.queenUpgrades.getLayMultiTier())
+        self.queenUpgrades.addEggs(self.queenUpgrades.getLayMultiTier())
 
     def hatchEgg(self):
-        if self.queenUpgrades.getEggs() <= 0:
-            pass
+        if self.queenUpgrades.getEggs() < self.incubator.getHatchMultiTier():
+            if self.queenUpgrades.getEggs() == 1:
+                self.ant_leave_animation()
+                self.incubator.setAnts(1)
+                self.queenUpgrades.addEggs(-1)
+            if self.queenUpgrades.getEggs() == 2:
+                self.ant_leave_animation()
+                Clock.schedule_once(self.ant_leave_animation, .2)
+                self.incubator.setAnts(2)
+                self.queenUpgrades.addEggs(-2)
         else:
-            self.ant_leave_animation()
+            if self.incubator.getHatchMultiTier() == 1:
+                self.ant_leave_animation()
+            elif self.incubator.getHatchMultiTier() == 2:
+                self.ant_leave_animation()
+                Clock.schedule_once(self.ant_leave_animation, .2)
+            elif self.incubator.getHatchMultiTier() == 3:
+                self.ant_leave_animation()
+                Clock.schedule_once(self.ant_leave_animation, .2)
+                Clock.schedule_once(self.ant_leave_animation, .4)
             self.incubator.setAnts(self.incubator.getHatchMultiTier())
-            self.queenUpgrades.setEggs(0 - (self.queenUpgrades.getLayMultiTier()))
+            self.queenUpgrades.addEggs(0 - (self.incubator.getHatchMultiTier()))
             if self.queenUpgrades.getEggs() <= 0:
                 self.queenUpgrades.setEggs(0)
 
